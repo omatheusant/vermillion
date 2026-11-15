@@ -34,6 +34,10 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 .idea/
+*.pem
+
+# Vercel
+.vercel
 
 # Material de referência licenciado — nunca versionar
 players_guide.pdf

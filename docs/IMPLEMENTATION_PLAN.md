@@ -24,6 +24,17 @@ Entregas:
 
 Critério de fechamento: `npm run build`, `npm run typecheck`, `npm run lint` passam; screenshots anexados; nenhuma dependência nova fora das listadas no documento mestre sem justificativa registrada.
 
+### Status — concluída (primeira rodada)
+
+- [x] Scaffold Next.js 16 (App Router, TS strict, Turbopack) + Tailwind v4 + shadcn/ui inicializado explicitamente com `-b radix` (a versão atual do CLI shadcn passou a usar Base UI por padrão — forçamos Radix para seguir o documento mestre à risca) + Lucide + `motion` (sucessor do Framer Motion) + Zod + React Hook Form + Zustand instalados.
+- [x] `docs/DESIGN_SYSTEM.md` escrito com paleta, tipografia e contraste calculado via script (não estimado visualmente).
+- [x] Componentes: `VermillionWordmark`, `GothicShell`, `VelvetCard`, `WaxSeal`, `LoreDivider`, `PageTransition`, `StatusBadge`, `LoreTooltip`, `AutosaveIndicator`, `WizardStepper`, `WizardShell`, `CharacterCard`, `CharacterRoster`, `DemoBanner`, `ComingSoon`.
+- [x] Landing `/`, Dashboard `/app`, Meu Grimório `/app/personagens`, Etapa 0 (`/app/personagens/novo`) e Etapa 1 funcional com React Hook Form + Zod + prévia viva (`/app/personagens/[id]/editar/[etapa]`). Rotas ainda não implementadas (`/entrar`, `/cadastro`, `/recuperar-senha`, `/codice`, `/personagens`, `/app/conselho`, Ficha Viva) recebem um placeholder temático (`ComingSoon`) em vez do 404 padrão do Next.js, cada um apontando a fase que o entrega.
+- [x] `npm run build`, `npm run typecheck`, `npm run lint` — todos passando (0 erros; 1 aviso esperado do React Compiler sobre `react-hook-form.watch()`, não corrigível sem trocar de biblioteca de formulário).
+- [x] Screenshot desktop (1440×900) via Chrome automation: landing (hero + manifesto + linha editorial + rodapé legal), dashboard com fixtures, roster, Etapa 1 do wizard com preview ao vivo testada interativamente (digitação refletindo na prévia e no indicador de autosave).
+- [ ] **Limitação registrada**: `resize_window` da automação de Chrome disponível neste ambiente não alterou o viewport capturado nos testes de tablet/mobile (screenshots saíram idênticos ao desktop) — não insisti além de duas tentativas, conforme orientação de evitar loops improdutivos. O layout usa breakpoints mobile-first do Tailwind (`sm:`/`md:`/`lg:`) com o stepper do wizard colapsando para horizontal e a prévia migrando para aba abaixo de `lg`, e a galeria de personagens colapsando para 1 coluna abaixo de `sm` — verificado por leitura do CSS gerado, não por captura visual real em viewport estreito. Revisitar com Playwright (Fase F) ou testando manualmente no navegador do usuário.
+- [x] Decisão de tooling: `cacheComponents`/`partialPrefetching` (Next.js 16 Cache Components) desligados por ora — a maioria das rotas é dado por usuário autenticado (Fase C+); forçar contornos de `Suspense`/`"use cache"` agora seria prematuro. Revisitar ao desenhar o data-fetching real.
+
 ## Fase C — Auth, migrations, RLS e persistência
 
 Pré-requisito externo: projeto Supabase criado pelo usuário (URL + anon key; service role key nunca no browser) — solicitar antes de iniciar esta fase.
