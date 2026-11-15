@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Testing
+coverage/
+
+# Env
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Supabase
+supabase/.temp/
+supabase/.branches/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Material de referência licenciado — nunca versionar
+players_guide.pdf
+docs/referencias/**/*.pdf
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
