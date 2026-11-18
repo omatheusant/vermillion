@@ -54,8 +54,7 @@ const FACTIONS = [
   },
 ];
 
-// TODO: substituir pelo link real do convite do servidor de Discord da crônica.
-const DISCORD_INVITE_URL = "#";
+const DISCORD_INVITE_URL = "https://discord.gg/yFAhVJZHt3";
 
 function SectionGlow({ tone = "crimson" }: { tone?: "crimson" | "wine" }) {
   const color = tone === "crimson" ? "var(--accent-crimson-deep)" : "var(--surface-wine)";
@@ -253,8 +252,8 @@ export default function LandingPage() {
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 py-20 text-center">
           <WaxSeal size="sm" />
           <p className="max-w-xl text-pretty text-sm text-ink-muted">
-            Vermillion é escrita e mantida por um único narrador-desenvolvedor, como projeto de fã
-            sem fins lucrativos. Este site é o arquivo oficial da crônica — nenhuma parte do
+            Vermillion é escrita e mantida por um grupo de narradores-desenvolvedores, como projeto
+            de fã sem fins lucrativos. Este site é o arquivo oficial da crônica — nenhuma parte do
             material original de Vampiro: A Máscara é reproduzida integralmente, apenas resumos
             autorais, sempre com referência à fonte.
           </p>
