@@ -39,6 +39,14 @@ Nomes de Bane/Compulsão mantidos em inglês na matriz de origem; a tradução P
 
 Caitiff e Sangue-Ralo (Thin-Blood) são linhagens sem clã fixo, com disciplinas e fluxo de criação próprios — não entram nesta tabela (ver seção 6).
 
+### 2.1 Conteúdo autoral efetivamente seedado — texto da crônica (não o da fonte local)
+
+O texto exibido ao jogador em `reference_clans` (Códice, seletor de clã) **não** é a tradução do Clan Sheet acima — é o texto próprio da crônica Vermillion, enviado pelo narrador (Lord Nariffin) via Discord em 14/11/2026: descrição narrativa, "Forças", "Fraqueza" (bane em PT-BR autoral) e afiliações típicas de seita por clã. `source_document` de cada linha registra essa origem (`"Crônica Vermillion — texto autoral do narrador (Discord, 14/11/2026)"`), distinta de `players_guide.pdf`.
+
+Divergência de nomenclatura registrada: a crônica chama a Disciplina **Celeridade/Celerity** de **"Rapidez"** — `reference_disciplines.id = 'celerity'` mantém o slug técnico da fonte (código em inglês, CLAUDE.md), mas `name = 'Rapidez'` é o que aparece na UI. As tríades de Disciplina por clã do texto autoral foram conferidas contra a tabela da seção 2 e são idênticas — nenhuma divergência mecânica, só de nome de uma Disciplina e de texto narrativo/afiliação de seita (este último meramente informativo, nunca restritivo — ver documento mestre, seção "Seitas/afiliação política").
+
+Caitiff e Sangue-Ralo permanecem sem linha em `reference_clans` (são `characters.lineage`, não clã) — continuam disponíveis como opção no wizard (etapa 2, Fase D) e no Códice, só que como seções próprias de texto, não como card de catálogo de clã.
+
 ## 3. Atributos, Perícias e Disciplinas — verificado (Vampire Traits and Types Summary Sheet, impressas 62–64)
 
 ### Atributos (9, confirma a estrutura do documento mestre)
@@ -110,7 +118,18 @@ Exemplos confirmados com custo em pontos (símbolo "•" = 1 ponto na fonte): Fa
 
 ## 9. Pendências de leitura (não bloqueiam o MVP, registradas para não esquecer)
 
-- Caitiff Merits/Flaws (p. 126–127).
+- ~~Caitiff Merits/Flaws (p. 126–127)~~ — lido na Fase D, seedado (seção 10).
 - Thin-Blood Merits/Flaws (~p. 134) e Blood Destiny (~p. 132).
 - Ghoul Advantages (~p. 141).
-- Oblivion Ceremonies, Blood Sorcery Rituals (p. 91, 99) — relevantes só se a crônica habilitar rituais, fora do escopo mecânico do MVP.
+- ~~Oblivion Ceremonies (p. 96–97)~~ — lido na Fase D (Level 4–5), seedado.
+- Blood Sorcery Rituals (p. 99) — catálogo de Feitiçaria de Sangue ainda incompleto (só Level 1–2 por nome, via fichas prontas; texto mecânico não lido).
+
+## 10. Catálogo de poderes, Tipos de Predador e Vantagens/Defeitos — Fase D
+
+Seedado em `supabase/migrations/20261116130001_seed_powers_predators_advantages.sql`. Duas fontes distintas dentro do `players_guide.pdf`, cada entrada com `source_page` próprio:
+
+- **"Iconic Characters"/"Instant Vampires" (impressas 63–68)**: fichas pré-prontas que citam poderes de Nível 1 (e alguns de Nível 2) por nome, cruzando com o clã/Disciplina — confirma a existência e o nome do poder, mas não o texto mecânico completo. Essas entradas entram como `requires_reference` (ADR 0001) mesmo com nome real confirmado — a coluna `name` não é um placeholder genérico, só o `summary` fica vazio até alguém ler o capítulo integral do poder.
+- **Capítulo "Discipline Powers" (impressas 69–85) e Oblivion Ceremonies (impressas 85–97)**: texto mecânico completo (custo, dados, sistema) a partir do Nível 2 de cada Disciplina (Nível 1 de Dominate e todo Oblivion são exceção, documentados desde o Nível 1). Essas entradas são `verified_from_source` com resumo autoral fiel ao texto em inglês.
+- **Tipos de Predador**: os 16 confirmados na seção 7 agora têm linha em `reference_predator_types`, incluindo os 3 com bônus mecânico confirmado por ficha pronta (Alleycat, Bagger, Siren) — os outros 13 ficam só com a sugestão de Disciplina, sem bônus automático (nenhum texto mecânico lido para eles ainda).
+- **Caitiff**: Méritos/Defeitos específicos (impressas 126–128) lidos e seedados com `lineage_restriction = 'caitiff'`.
+- **Feitiçaria de Sangue**: nenhuma entrada `verified_from_source` ainda — só Nível 1/2 por nome (`requires_reference`), via fichas prontas. Capítulo de Rituais (p. 99) não lido nesta rodada.

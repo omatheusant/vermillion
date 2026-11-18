@@ -10,22 +10,28 @@ const sizePx = {
  * Selo de cera geométrico original (círculo irregular + monograma "V").
  * Reservado para momentos de peso: aprovação, publicação, autenticidade
  * (docs/DESIGN_SYSTEM.md §3) — não usar como decoração recorrente.
+ *
+ * `animateStamp` liga o "carimbo" (escala 0.8→1 com leve overshoot,
+ * docs/DESIGN_SYSTEM.md §5) — só deve ser `true` no instante real da
+ * ação (aprovar/publicar), nunca em toda renderização da página.
  */
 export function WaxSeal({
   size = "md",
   className,
   label,
+  animateStamp = false,
 }: {
   size?: keyof typeof sizePx;
   className?: string;
   label?: string;
+  animateStamp?: boolean;
 }) {
   const px = sizePx[size];
   return (
     <div
       role="img"
       aria-label={label ?? "Selo de autenticidade Vermillion"}
-      className={cn("inline-flex flex-col items-center gap-2", className)}
+      className={cn("inline-flex flex-col items-center gap-2", animateStamp && "animate-seal-stamp", className)}
     >
       <svg width={px} height={px} viewBox="0 0 100 100" aria-hidden="true">
         <path

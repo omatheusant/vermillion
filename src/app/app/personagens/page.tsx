@@ -1,7 +1,7 @@
 import { GothicShell } from "@/components/vermillion/gothic-shell";
-import { DemoBanner } from "@/components/vermillion/demo-banner";
 import { CharacterRoster } from "@/components/vermillion/character-roster";
-import { DEMO_CHARACTERS } from "@/lib/fixtures/demo-characters";
+import { SignOutButton } from "@/components/vermillion/auth/sign-out-button";
+import { listMyCharacters } from "@/lib/characters";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/app" },
@@ -9,10 +9,11 @@ const NAV_ITEMS = [
   { label: "Os Condenados", href: "/personagens" },
 ];
 
-export default function MeuGrimorioPage() {
+export default async function MeuGrimorioPage() {
+  const characters = await listMyCharacters();
+
   return (
-    <GothicShell navItems={NAV_ITEMS}>
-      <DemoBanner />
+    <GothicShell navItems={NAV_ITEMS} actions={<SignOutButton />}>
       <div className="mx-auto max-w-6xl px-6 py-12">
         <header className="mb-8 flex flex-col gap-2">
           <p className="font-badge text-xs uppercase tracking-[0.2em] text-ink-muted">
@@ -26,7 +27,7 @@ export default function MeuGrimorioPage() {
             que você ainda não arquivou.
           </p>
         </header>
-        <CharacterRoster characters={DEMO_CHARACTERS} />
+        <CharacterRoster characters={characters} />
       </div>
     </GothicShell>
   );

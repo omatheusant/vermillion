@@ -111,6 +111,8 @@ audit_events (id, actor_id, character_id null, chronicle_id null, action text, j
 
 `character_revisions.snapshot` é o congelamento pós-aprovação citado no documento mestre (etapa 9) — gerado dentro da mesma função `approve_character` (ADR 0007), nunca calculado no client.
 
+**Correção de Fase C**: `created_by`/`approved_by`/`reviewer_id`/`actor_id` (e `chronicle_memberships.invited_by`, `character_powers.granted_by_narrator_id`) são `ON DELETE SET NULL` para `profiles(id)`, não `NO ACTION`. Descoberto pelos testes de integração: sem isso, excluir a conta de qualquer usuário que já tivesse revisado/aprovado/arquivado **o personagem de outro jogador** ficava permanentemente bloqueado por violação de FK — a trilha em si nunca é apagada, só o vínculo com o ator deletado vira null (migration `20261116120011`).
+
 ## 4. Catálogo de referência e mídia
 
 ```

@@ -2,7 +2,7 @@
 
 ## O que é
 
-Vermillion é um arquivo digital de criaturas da noite: plataforma web própria (não um clone de COMP/CON) de criação, organização, progressão e publicação de personagens de **Vampire: The Masquerade, 5ª edição (V5)**, construída para uma crônica de texto com múltiplos jogadores e narradores, operada por um servidor de Discord. É um projeto de fã, gratuito, sem monetização.
+Vermillion é uma crônica de texto de **Vampire: The Masquerade, 5ª edição (V5)** ambientada na Londres contemporânea de 2026, com múltiplos jogadores e narradores, operada por um servidor de Discord. Este documento descreve o site: a plataforma web própria (não um clone de COMP/CON) de criação, organização, progressão e publicação de personagens que serve como arquivo digital oficial da crônica. É um projeto de fã, gratuito, sem monetização.
 
 ## Para quem
 

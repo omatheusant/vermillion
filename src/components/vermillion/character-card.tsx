@@ -17,7 +17,7 @@ export function CharacterCard({ character }: { character: CharacterSummary }) {
   return (
     <Link href={`/app/personagens/${character.id}`} className="block">
       <VelvetCard
-        className="h-full transition-colors hover:border-ornament-gold/60"
+        className="hover-lift-glow h-full"
         cornerLabel={<StatusBadge status={character.status} />}
       >
         <div className="flex flex-col gap-4">
@@ -45,7 +45,11 @@ export function CharacterCard({ character }: { character: CharacterSummary }) {
               <span>Progresso da ficha</span>
               <span>{character.completion}%</span>
             </div>
-            <Progress value={character.completion} className="h-1.5" />
+            <Progress
+              value={character.completion}
+              aria-label={`Progresso da ficha: ${character.completion}%`}
+              className="h-1.5"
+            />
           </div>
         </div>
       </VelvetCard>

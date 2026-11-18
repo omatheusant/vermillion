@@ -1,15 +1,23 @@
 import { GothicShell } from "@/components/vermillion/gothic-shell";
-import { ComingSoon } from "@/components/vermillion/coming-soon";
+import { VelvetCard } from "@/components/vermillion/velvet-card";
+import { LoreDivider } from "@/components/vermillion/lore-divider";
+import { RecuperarSenhaForm } from "@/components/vermillion/auth/recuperar-senha-form";
 
 export default function RecuperarSenhaPage() {
   return (
     <GothicShell>
-      <ComingSoon
-        eyebrow="Autenticação"
-        title="Recuperar senha"
-        description="Reset de senha por email via Supabase Auth chega com a Fase C."
-        phase="Fase C — Auth, migrations, RLS e persistência"
-      />
+      <div className="mx-auto max-w-md px-6 py-16">
+        <p className="text-center font-badge text-xs uppercase tracking-[0.2em] text-ink-muted">
+          Autenticação
+        </p>
+        <h1 className="mt-3 text-center font-display text-3xl text-foreground">
+          Recuperar o acesso.
+        </h1>
+        <LoreDivider className="my-8" />
+        <VelvetCard>
+          <RecuperarSenhaForm />
+        </VelvetCard>
+      </div>
     </GothicShell>
   );
 }

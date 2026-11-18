@@ -11,6 +11,9 @@ dist/
 
 # Testing
 coverage/
+test-results/
+playwright-report/
+blob-report/
 
 # Env
 .env
@@ -21,6 +24,9 @@ coverage/
 # Supabase
 supabase/.temp/
 supabase/.branches/
+
+# Seed de demonstração (Fase F) — credenciais das contas demo, nunca versionar
+scripts/.demo-credentials.json
 
 # Logs
 npm-debug.log*

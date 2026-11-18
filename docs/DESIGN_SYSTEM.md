@@ -61,7 +61,8 @@ Fontes carregadas via `next/font` (self-hosted, sem CDN externo) — crítico pa
 - Duração 180–420ms, `ease-out` para entrada, `ease-in` para saída. Biblioteca: Motion (Framer Motion).
 - Padrões: fade+translateY(8px) na entrada de seção; foco de item selecionado com leve escala (1.0→1.02) e brilho de borda dourada; selo de aprovação com um único "carimbo" (escala 0.8→1 com leve overshoot) na conclusão de aprovação/publicação.
 - `prefers-reduced-motion: reduce` remove todo transform/opacity de entrada não essencial (mantém apenas mudanças de estado instantâneas); implementado via hook único `useReducedMotion` central, não checagem espalhada.
-- Proibido: scroll-jacking, splash screen, vídeo de fundo, parallax de profundidade > 1 camada.
+- Proibido: scroll-jacking, splash screen, vídeo de fundo.
+- Parallax (regra revisada a pedido explícito do usuário — Fase de refinamento visual): no máximo **1 camada por seção**, nunca na própria tipografia/conteúdo de leitura — só em pano de fundo decorativo (`ParallaxLayer`, `src/components/vermillion/parallax-layer.tsx`). Implementado com `scroll`/`resize` + `requestAnimationFrame` (sem loop contínuo ocioso), desliga por completo sob `prefers-reduced-motion`. Continua proibido empilhar mais de uma camada de parallax na mesma seção.
 
 ## 6. Componentes — notas de implementação
 

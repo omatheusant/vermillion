@@ -1,0 +1,566 @@
+{
+  "schema_version": "design-dna/1.0",
+  "project": "Vermillion",
+  "generated_at": "2026-11-17",
+  "constraint_note": "A paleta de cores existente do Vermillion (obsidian, ebony, wine, ivory, ornament-gold, crimson deep/bright — ver src/app/globals.css e docs/DESIGN_SYSTEM.md §1) é preservada byte a byte. As 5 referências abaixo foram medidas com scripts/measure-colors.mjs por completude de processo, mas seus hexes NÃO substituem nenhum token Vermillion — eles só confirmam que a família tonal (preto quase absoluto + vinho/carmesim + um acento quente claro) já é a mesma família que o Vermillion usa, o que valida a fusão sem precisar trocar cor nenhuma.",
+
+  "references": [
+    {
+      "meta": {
+        "name": "Reference 1 — Victoria D. Tzigani (author site, 'geral-reference.png')",
+        "description": "Site editorial de autora gótica: hero com título serifado itálico sobre vinheta, borda de papel rasgado separando seções, ticker-tape de newsletter em vinho, carrossel de resenhas sobre textura de pedra catedral, polaroid com fita adesiva, rodapé vinho com wordmark serifado centralizado.",
+        "source_references": ["references/design/geral-reference.png"],
+        "created_at": "2026-11-17"
+      },
+      "design_system": {
+        "color": {
+          "palette_type": "monochromatic-dark com acento vinho",
+          "primary": { "hex": "#2b2b2d", "role": "background/surface neutro" },
+          "secondary": { "hex": "#1f1d1f", "role": "superfície mais profunda" },
+          "accent": { "hex": "#551013", "role": "faixas de destaque (ticker, rodapé, CTA)" },
+          "neutral": { "scale": ["#1f1d1f", "#2b2b2d", "#44403f", "#795452", "#a28a85", "#d8cecb"], "usage": "texto principal no claro do fim da escala sobre os dois fundos escuros do início" },
+          "semantic": { "success": "não observado", "warning": "não observado", "error": "#551013 reutilizado como vinho de alerta/urgência (newsletter)", "info": "não observado" },
+          "surface": { "background": "#2b2b2d", "card": "#1f1d1f", "elevated": "#44403f" },
+          "contrast_strategy": "camadas sutis de cinza-carvão com um único acento vinho saturado reservado a faixas horizontais inteiras, nunca disperso",
+          "measurement": { "k": 8, "method": "scripts/measure-colors.mjs (k-means)" },
+          "measured_palette": [
+            { "hex": "#2b2b2d", "coverage": 0.3567, "role": "background" },
+            { "hex": "#1f1d1f", "coverage": 0.292, "role": "unassigned" },
+            { "hex": "#551013", "coverage": 0.198, "role": "accent" },
+            { "hex": "#44403f", "coverage": 0.1041, "role": "unassigned" },
+            { "hex": "#795452", "coverage": 0.0212, "role": "unassigned" },
+            { "hex": "#d8cecb", "coverage": 0.0155, "role": "text" },
+            { "hex": "#a28a85", "coverage": 0.012, "role": "unassigned" }
+          ]
+        },
+        "typography": {
+          "type_scale": {
+            "display": { "size": "~2.75rem", "weight": "600 (itálico no termo de ênfase)", "line_height": "1.1", "tracking": "normal" },
+            "heading_1": { "size": "~2rem", "weight": "600", "line_height": "1.15", "tracking": "normal" },
+            "heading_2": { "size": "~1.5rem", "weight": "500", "line_height": "1.2", "tracking": "0.02em" },
+            "heading_3": { "size": "~1.1rem", "weight": "600", "line_height": "1.3", "tracking": "0.04em uppercase" },
+            "body": { "size": "~0.95rem", "weight": "400", "line_height": "1.7", "tracking": "normal" },
+            "body_small": { "size": "~0.8rem", "weight": "400", "line_height": "1.5", "tracking": "normal" },
+            "caption": { "size": "~0.7rem", "weight": "500", "line_height": "1.4", "tracking": "0.1em uppercase" },
+            "overline": { "size": "~0.65rem", "weight": "600", "line_height": "1", "tracking": "0.15em uppercase" }
+          },
+          "font_families": { "heading": "serifa clássica itálica (estilo Playfair/Garamond editorial)", "body": "serifa ou sans humanista discreta", "mono": "não usado" },
+          "font_style_notes": "serifa editorial de livraria com peso variável dentro da mesma frase (itálico de ênfase misturado a redondo), nunca sans-serif geométrica"
+        },
+        "spacing": { "base_unit": "8px", "scale": [8, 16, 24, 40, 64, 96], "content_density": "comfortable, com respiro generoso entre faixas", "section_rhythm": "blocos inteiros de largura 100% alternando com blocos centralizados de largura de leitura — ritmo por mudança de largura, não só por padding" },
+        "layout": { "grid_system": "faixas horizontais full-bleed intercaladas com coluna central de leitura", "max_content_width": "~960px para texto, 100% para faixas decorativas", "columns": "1 (mobile-first, sem grid multi-coluna visível)", "gutter": "24px", "breakpoints": "não observável (imagem estática)", "alignment_tendency": "centered" },
+        "shape": { "border_radius": { "small": "2px", "medium": "0px (cartões retangulares)", "large": "0px", "pill": "999px (só em botão de newsletter)" }, "border_usage": "bordas quase ausentes — a separação visual vem de cor de fundo e da borda rasgada de papel, não de `border`", "divider_style": "borda de papel rasgado (SVG/máscara irregular), não `<hr>`" },
+        "elevation": { "shadow_style": "nenhuma sombra drop visível", "levels": { "low": "nenhuma", "medium": "nenhuma", "high": "nenhuma" }, "depth_cues": "profundidade por textura de papel/pedra e sobreposição de camadas, não por sombra" },
+        "iconography": { "style": "nenhum ícone de UI — só ornamento ilustrado (vinha floral) e fotografia", "stroke_weight": "n/a", "size_scale": "n/a", "preferred_set": "ilustração custom, não biblioteca de ícones" },
+        "motion": { "easing": "não observável (estático)", "duration_scale": { "micro": "n/a", "normal": "n/a", "macro": "n/a" }, "entrance_pattern": "não observável", "exit_pattern": "não observável", "philosophy": "editorial calmo — composição estática presumida, nenhum indício de movimento agressivo" },
+        "components": { "button_style": "pill sólido vinho com texto claro tracked uppercase", "input_style": "campo retangular claro com placeholder, borda quase inexistente", "card_style": "cartão de capa de livro com sombra de imagem só (não de container)", "navigation_pattern": "barra superior fixa com wordmark central e menu disperso nas laterais", "modal_style": "não observado", "list_style": "carrossel horizontal de depoimentos com setas", "component_notes": "ticker-tape horizontal repetindo o mesmo CTA (padrão de 'faixa de anúncio' de loja/editora), moldura de polaroid com fita adesiva para foto de autor" }
+      },
+      "design_style": {
+        "aesthetic": { "mood": ["romântico-sombrio", "editorial", "sedutor", "literário", "ligeiramente lúdico"], "visual_metaphor": "capa de romance gótico de livraria", "era_influence": "gótico vitoriano filtrado por design editorial contemporâneo", "genre": "luxury editorial / author brand", "personality_traits": ["sedutora", "confiante", "teatral", "acolhedora apesar do tema sombrio"], "adjectives": ["gótico", "romântico", "rasgado", "ornamentado", "quente"] },
+        "visual_language": { "complexity": "moderate", "ornamentation": "decorative", "whitespace_usage": "generoso nos blocos de leitura, denso nas faixas decorativas", "visual_weight_distribution": "topo pesado (hero ilustrado) afunilando para blocos de texto leves", "focal_strategy": "single hero element por seção, nunca dois focos competindo", "contrast_level": "moderado — vinho contra carvão, nunca puro preto contra branco", "texture_usage": "papel rasgado, pedra de catedral, fita adesiva — texturas como moldura, nunca atrás de corpo de texto" },
+        "composition": { "hierarchy_method": "scale contrast + mudança de textura de fundo entre seções", "balance_type": "symmetric dentro de cada faixa", "flow_direction": "vertical top-to-bottom, uma seção por conceito", "grouping_strategy": "cada seção é uma unidade fechada (própria cor de fundo), sem seções se misturando", "negative_space_role": "respiro que deixa a ilustração/foto respirar antes do próximo bloco" },
+        "imagery": { "photo_treatment": "fotografia de autor em polaroid com leve dessaturação", "illustration_style": "vinha floral gótica linear em baixo contraste sobre fundo escuro", "graphic_elements": "borda de papel rasgado, fita adesiva, moldura de pedra ornamentada", "pattern_usage": "textura de pedra repetida como fundo de seção, nunca como fundo de texto corrido", "image_shape": "retangular com cantos retos, exceto a polaroid (levemente rotacionada)" },
+        "interaction_feel": { "feedback_style": "não observável (estático)", "hover_behavior": "presumido: sublinhado/realce sutil em link de nav", "transition_personality": "fade-subtle (presumido pelo gênero)", "loading_style": "não observável", "microinteraction_density": "baixa" },
+        "brand_voice_in_ui": { "tone": "convidativo e teatral, em 2ª pessoa direta ('Dont you like playing...')", "formality": "informal-literário", "cta_style": "friendly invitation com toque de provocação", "empty_state_approach": "não observável", "error_tone": "não observável" }
+      },
+      "visual_effects": {
+        "overview": { "effect_intensity": "subtle-accent", "performance_tier": "lightweight", "fallback_strategy": "degrada para imagem estática sem perda de informação", "primary_technology": "CSS only" },
+        "background_effects": { "type": "none", "description": "fundos sólidos ou com textura de imagem estática, sem animação", "technology": "CSS", "params": { "color_palette": ["#2b2b2d", "#1f1d1f"], "speed": "n/a", "density": "n/a", "opacity": "n/a", "blend_mode": "normal" } },
+        "particle_systems": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "count": "n/a", "shape": "n/a", "size_range": "n/a", "movement_pattern": "n/a", "color_behavior": "n/a", "interaction": "none", "spawn_area": "n/a" } },
+        "3d_elements": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "renderer": "n/a", "lighting": "n/a", "camera": "n/a", "materials": "n/a", "geometry": "n/a", "post_processing": [], "interaction_model": "n/a" } },
+        "shader_effects": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "uniforms": "n/a", "vertex_manipulation": "n/a", "fragment_output": "n/a", "noise_type": "n/a", "distortion": "n/a" } },
+        "scroll_effects": { "parallax": { "enabled": false, "layers": "0", "depth_range": "n/a", "speed_curve": "n/a" }, "scroll_triggered_animations": { "enabled": true, "trigger_points": "entrada de cada faixa de seção", "animation_type": "fade-up (presumido)", "scrub_behavior": "none" }, "scroll_morphing": { "enabled": false, "description": "não observado" } },
+        "text_effects": { "type": "none", "description": "itálico de ênfase dentro do título é tratamento tipográfico estático, não animação", "technology": "CSS", "params": { "split_strategy": "n/a", "animation_per_unit": "n/a", "stagger": "n/a", "effect_style": "n/a" } },
+        "cursor_effects": { "enabled": false, "type": "none", "description": "não observado", "params": { "shape": "n/a", "size": "n/a", "blend_mode": "n/a", "trail": "n/a", "interaction_zone": "n/a" } },
+        "image_effects": { "type": "reveal-clip", "description": "borda de papel rasgado funciona como uma máscara de recorte entre a foto do hero e a seção seguinte", "technology": "CSS clip-path / SVG mask", "params": { "filter_pipeline": "leve dessaturação na foto do hero", "hover_transform": "não observável", "reveal_animation": "não observável", "distortion_type": "none" } },
+        "glassmorphism_neumorphism": { "enabled": false, "style": "none", "params": { "blur_radius": "n/a", "transparency": "n/a", "border_treatment": "n/a", "shadow_type": "n/a", "light_source_angle": "n/a" } },
+        "canvas_drawings": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "draw_method": "n/a", "animation_loop": "n/a", "color_scheme": "n/a", "responsiveness": "n/a", "interaction": "n/a" } },
+        "svg_animations": { "enabled": false, "type": "none", "description": "vinha floral parece estática; se animada, seria 'decorative-loop' muito sutil", "params": { "animation_method": "n/a", "path_morphing": "n/a", "stroke_animation": "n/a", "filter_effects": "n/a" } },
+        "composite_notes": "O dispositivo mais transportável desta referência é a borda de 'papel rasgado' como transição de seção e o ticker-tape de faixa inteira — ambos leves (CSS/SVG), sem exigir WebGL."
+      }
+    },
+
+    {
+      "meta": {
+        "name": "Reference 2 — Cartier / Nerpherius key art ('hero-reference.jpg')",
+        "description": "Pôster cinematográfico: leopardo emergindo da escuridão à esquerda, clarão vermelho com lens flare cruzando a composição, lettering script-serifado enorme sobre caixa-alta condensada, legendas pequenas tracked dispersas, vinheta pesada nas bordas.",
+        "source_references": ["references/design/hero-reference.jpg"],
+        "created_at": "2026-11-17"
+      },
+      "design_system": {
+        "color": {
+          "palette_type": "monochromatic quase-preto com um único acento vermelho incandescente",
+          "primary": { "hex": "#0f0c0a", "role": "fundo/vinheta" },
+          "secondary": { "hex": "#261916", "role": "transição de sombra para o clarão" },
+          "accent": { "hex": "#c92c33", "role": "lettering do nome e lens flare" },
+          "neutral": { "scale": ["#0f0c0a", "#261916", "#472e2a", "#745c56", "#b98b84", "#e6c7c0"], "usage": "texto claro (#e6c7c0) só nas legendas pequenas, nunca como corpo grande" },
+          "semantic": { "success": "não observado", "warning": "não observado", "error": "não observado", "info": "não observado" },
+          "surface": { "background": "#0f0c0a", "card": "não aplicável (composição de imagem única)", "elevated": "#261916" },
+          "contrast_strategy": "high contrast pontual — quase tudo é preto, o olho é puxado só pelo brilho vermelho e pelo branco do pelo do animal",
+          "measurement": { "k": 8, "method": "scripts/measure-colors.mjs (k-means)" },
+          "measured_palette": [
+            { "hex": "#0f0c0a", "coverage": 0.6058, "role": "background" },
+            { "hex": "#261916", "coverage": 0.2223, "role": "unassigned" },
+            { "hex": "#472e2a", "coverage": 0.0861, "role": "unassigned" },
+            { "hex": "#745c56", "coverage": 0.027, "role": "unassigned" },
+            { "hex": "#b98b84", "coverage": 0.019, "role": "unassigned" },
+            { "hex": "#861e20", "coverage": 0.0186, "role": "unassigned" },
+            { "hex": "#c92c33", "coverage": 0.0115, "role": "accent" },
+            { "hex": "#e6c7c0", "coverage": 0.0097, "role": "text" }
+          ]
+        },
+        "typography": {
+          "type_scale": {
+            "display": { "size": "~6rem", "weight": "400 script + 700 condensada misturadas na mesma palavra", "line_height": "0.9", "tracking": "tight no script, normal na condensada" },
+            "heading_1": { "size": "~1.4rem", "weight": "600", "line_height": "1.1", "tracking": "0.3em uppercase" },
+            "heading_2": { "size": "n/a", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "heading_3": { "size": "n/a", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "body": { "size": "n/a (peça não tem corpo de texto)", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "body_small": { "size": "~0.75rem", "weight": "500", "line_height": "1.3", "tracking": "0.15em uppercase" },
+            "caption": { "size": "~0.65rem", "weight": "500", "line_height": "1.2", "tracking": "0.2em uppercase" },
+            "overline": { "size": "~0.6rem", "weight": "500", "line_height": "1", "tracking": "0.25em uppercase" }
+          },
+          "font_families": { "heading": "script caligráfico de luxo + condensada bold combinados num só lettering", "body": "sans tracked para legendas", "mono": "não usado" },
+          "font_style_notes": "lettering de marca de moda/perfume — duas famílias radicalmente diferentes coexistindo na mesma palavra, nunca em texto corrido"
+        },
+        "spacing": { "base_unit": "n/a (peça de imagem única, não UI)", "scale": [], "content_density": "spacious — um único foco cercado de vazio escuro", "section_rhythm": "n/a" },
+        "layout": { "grid_system": "assimétrico — sujeito à esquerda, texto à direita, legendas nos cantos", "max_content_width": "tela cheia", "columns": "n/a", "gutter": "n/a", "breakpoints": "n/a", "alignment_tendency": "asymmetric" },
+        "shape": { "border_radius": { "small": "n/a", "medium": "n/a", "large": "n/a", "pill": "n/a" }, "border_usage": "none", "divider_style": "none" },
+        "elevation": { "shadow_style": "soft diffused (glow, não sombra de objeto)", "levels": { "low": "halo sutil ao redor da legenda", "medium": "clarão do lens flare", "high": "não aplicável" }, "depth_cues": "glow/bloom e vinheta criam profundidade atmosférica, não camadas de UI" },
+        "iconography": { "style": "nenhum ícone de UI", "stroke_weight": "n/a", "size_scale": "n/a", "preferred_set": "n/a" },
+        "motion": { "easing": "não observável (estático)", "duration_scale": { "micro": "n/a", "normal": "n/a", "macro": "n/a" }, "entrance_pattern": "presumido: fade + leve glow pulse no lançamento", "exit_pattern": "n/a", "philosophy": "cinematic" },
+        "components": { "button_style": "n/a (peça de key art, não UI)", "input_style": "n/a", "card_style": "n/a", "navigation_pattern": "n/a", "modal_style": "n/a", "list_style": "n/a", "component_notes": "o valor transportável aqui não é componente, é tratamento de luz (glow/bloom + lens flare + vinheta) aplicável a um hero de landing" }
+      },
+      "design_style": {
+        "aesthetic": { "mood": ["predatório", "luxuoso", "ameaçador", "sedutor", "intenso"], "visual_metaphor": "pôster de perfume/moda de alta-costura com tema de fera noturna", "era_influence": "contemporâneo editorial de luxo", "genre": "key art cinematográfico", "personality_traits": ["confiante", "perigosa", "magnética"], "adjectives": ["incandescente", "predatório", "cinematográfico", "minimalista no layout, máximo na luz"] },
+        "visual_language": { "complexity": "minimal (poucos elementos) mas rich em tratamento de luz", "ornamentation": "subtle accents (lens flare como único 'ornamento')", "whitespace_usage": "quase tudo é espaço negativo escuro", "visual_weight_distribution": "concentrado em dois pontos: olho do animal e o clarão central", "focal_strategy": "single hero element — o nome em lettering, o animal como contraponto silencioso", "contrast_level": "extremo em pontos isolados, baixo no resto", "texture_usage": "grão de filme sutil, nenhuma textura de papel/material" },
+        "composition": { "hierarchy_method": "spatial isolation + glow", "balance_type": "asymmetric", "flow_direction": "diagonal (olho do animal → clarão → nome)", "grouping_strategy": "cada legenda isolada no próprio canto, sem agrupar em blocos", "negative_space_role": "é o próprio assunto — a escuridão vende o mistério" },
+        "imagery": { "photo_treatment": "render realista de estúdio com grade de cor vermelho-preto", "illustration_style": "n/a", "graphic_elements": "lens flare anamórfico, vinheta", "pattern_usage": "nenhum", "image_shape": "full-bleed sem moldura" },
+        "interaction_feel": { "feedback_style": "não observável", "hover_behavior": "não observável", "transition_personality": "presumido: smooth glide lento, nunca snappy (o gênero pede lentidão deliberada)", "loading_style": "não observável", "microinteraction_density": "muito baixa — a peça pede quietude, não ruído de interface" },
+        "brand_voice_in_ui": { "tone": "enigmático, poucas palavras", "formality": "formal-editorial", "cta_style": "subtle suggestion (quase nenhum texto de ação)", "empty_state_approach": "não observável", "error_tone": "não observável" }
+      },
+      "visual_effects": {
+        "overview": { "effect_intensity": "moderate", "performance_tier": "lightweight", "fallback_strategy": "reduz a gradiente CSS estático sem o glow animado", "primary_technology": "CSS only" },
+        "background_effects": { "type": "mesh-gradient", "description": "clarão radial avermelhado simulando lens flare, com leve ruído de grão por cima", "technology": "CSS radial-gradient + SVG feTurbulence para grão", "params": { "color_palette": ["#c92c33", "#861e20", "#0f0c0a"], "speed": "muito lenta se animado (respiração de opacidade, não deslocamento)", "density": "baixa", "opacity": "0.15–0.35 no pico do clarão", "blend_mode": "screen ou lighten" } },
+        "particle_systems": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "count": "n/a", "shape": "n/a", "size_range": "n/a", "movement_pattern": "n/a", "color_behavior": "n/a", "interaction": "none", "spawn_area": "n/a" } },
+        "3d_elements": { "enabled": false, "type": "none", "description": "a imagem do animal é renderizada/fotografada, não um elemento 3D interativo na própria interface", "technology": "n/a", "params": { "renderer": "n/a", "lighting": "n/a", "camera": "n/a", "materials": "n/a", "geometry": "n/a", "post_processing": [], "interaction_model": "n/a" } },
+        "shader_effects": { "enabled": false, "type": "none", "description": "o brilho pode ser replicado só com CSS/SVG, não exige shader custom", "technology": "n/a", "params": { "uniforms": "n/a", "vertex_manipulation": "n/a", "fragment_output": "n/a", "noise_type": "n/a", "distortion": "n/a" } },
+        "scroll_effects": { "parallax": { "enabled": true, "layers": "2 (sujeito + clarão de fundo)", "depth_range": "sutil, poucos px", "speed_curve": "ease-out lento" }, "scroll_triggered_animations": { "enabled": true, "trigger_points": "entrada do hero na viewport", "animation_type": "fade-up + scale-in muito sutil no lettering", "scrub_behavior": "none" }, "scroll_morphing": { "enabled": false, "description": "não observado" } },
+        "text_effects": { "type": "gradient-fill", "description": "o lettering do nome parece ter um leve degradê/glow na própria tinta vermelha, não textura plana", "technology": "CSS background-clip:text com gradient + text-shadow", "params": { "split_strategy": "by-word", "animation_per_unit": "nenhuma por padrão; glow pulse opcional no load", "stagger": "n/a", "effect_style": "glow incandescente" } },
+        "cursor_effects": { "enabled": false, "type": "none", "description": "não observado", "params": { "shape": "n/a", "size": "n/a", "blend_mode": "n/a", "trail": "n/a", "interaction_zone": "n/a" } },
+        "image_effects": { "type": "none", "description": "a foto já vem com o grading aplicado, não há efeito de hover/distorção", "technology": "CSS filter (grain/vignette)", "params": { "filter_pipeline": "vignette + grain + leve bloom", "hover_transform": "nenhum", "reveal_animation": "fade-in no load", "distortion_type": "none" } },
+        "glassmorphism_neumorphism": { "enabled": false, "style": "none", "params": { "blur_radius": "n/a", "transparency": "n/a", "border_treatment": "n/a", "shadow_type": "n/a", "light_source_angle": "n/a" } },
+        "canvas_drawings": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "draw_method": "n/a", "animation_loop": "n/a", "color_scheme": "n/a", "responsiveness": "n/a", "interaction": "n/a" } },
+        "svg_animations": { "enabled": false, "type": "none", "description": "não observado diretamente, mas o flare poderia ser um SVG filter animado", "params": { "animation_method": "n/a", "path_morphing": "n/a", "stroke_animation": "n/a", "filter_effects": "feGaussianBlur + feColorMatrix para o glow, se implementado em SVG" } },
+        "composite_notes": "O dispositivo central transportável é 'glow radial vermelho + grão de filme + vinheta' como tratamento de hero — leve o bastante para CSS puro, e é exatamente o tipo de profundidade atmosférica que falta hoje na landing do Vermillion (que hoje só tem um radial-gradient simples sem grão nem vinheta)."
+      }
+    },
+
+    {
+      "meta": {
+        "name": "Reference 3 — Hooligan logo/poster ('aesthetic-refernce.jpg')",
+        "description": "Pôster/selo tipográfico: fundo preto com grão de papel, respingos/rasgos vermelhos emoldurando os 4 cantos, wordmark blackletter dourado centralizado com floreio vermelho sublinhando, legendas pequenas tracked nos cantos como carimbo de edição.",
+        "source_references": ["references/design/aesthetic-refernce.jpg"],
+        "created_at": "2026-11-17"
+      },
+      "design_system": {
+        "color": {
+          "palette_type": "triádica reduzida: preto, vermelho, dourado",
+          "primary": { "hex": "#0e0d0d", "role": "fundo" },
+          "secondary": { "hex": "#4e1214", "role": "vinho de transição nas bordas respingadas" },
+          "accent": { "hex": "#841317", "role": "respingo/rasgo das bordas e floreio sob o wordmark" },
+          "neutral": { "scale": ["#0e0d0d", "#5c4b3a", "#8f7560", "#b9a080", "#d4b893", "#f2d6af"], "usage": "o wordmark e as legendas de canto usam o topo claro da escala (dourado/marfim), nunca cinza puro" },
+          "semantic": { "success": "não observado", "warning": "não observado", "error": "não observado", "info": "não observado" },
+          "surface": { "background": "#0e0d0d", "card": "não aplicável", "elevated": "não aplicável" },
+          "contrast_strategy": "altíssimo contraste pontual entre o dourado do wordmark e o preto, com o vermelho só nas bordas — nunca os três competindo no centro",
+          "measurement": { "k": 8, "method": "scripts/measure-colors.mjs (k-means)" },
+          "measured_palette": [
+            { "hex": "#0e0d0d", "coverage": 0.8484, "role": "background" },
+            { "hex": "#841317", "coverage": 0.0843, "role": "accent" },
+            { "hex": "#4e1214", "coverage": 0.0371, "role": "unassigned" },
+            { "hex": "#d4b893", "coverage": 0.0101, "role": "text" },
+            { "hex": "#b9a080", "coverage": 0.0083, "role": "unassigned" }
+          ]
+        },
+        "typography": {
+          "type_scale": {
+            "display": { "size": "~5rem", "weight": "blackletter/gótico tradicional (peso visual pesado)", "line_height": "0.95", "tracking": "normal (a fonte já é condensada)" },
+            "heading_1": { "size": "n/a", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "heading_2": { "size": "n/a", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "heading_3": { "size": "~0.9rem", "weight": "600", "line_height": "1.2", "tracking": "0.2em uppercase" },
+            "body": { "size": "n/a", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "body_small": { "size": "~0.8rem", "weight": "600", "line_height": "1.3", "tracking": "0.1em" },
+            "caption": { "size": "~0.65rem", "weight": "600", "line_height": "1.3", "tracking": "0.08em" },
+            "overline": { "size": "~0.6rem", "weight": "700", "line_height": "1", "tracking": "0.15em uppercase" }
+          },
+          "font_families": { "heading": "blackletter/gótico tradicional (estilo Old English)", "body": "sans condensada bold para as legendas de canto", "mono": "não usado" },
+          "font_style_notes": "blackletter reservado só ao wordmark principal — todo o resto do texto é sans tracked, exatamente a mesma regra que Vermillion já aplica ao Cinzel (só insígnia, nunca parágrafo)"
+        },
+        "spacing": { "base_unit": "n/a (peça de pôster, não UI)", "scale": [], "content_density": "spacious no centro, denso nos 4 cantos", "section_rhythm": "n/a" },
+        "layout": { "grid_system": "simétrico com 4 âncoras de canto + 1 centro", "max_content_width": "quadrado 1:1", "columns": "n/a", "gutter": "n/a", "breakpoints": "n/a", "alignment_tendency": "centered com reforço simétrico nos cantos" },
+        "shape": { "border_radius": { "small": "0px", "medium": "0px", "large": "0px", "pill": "n/a" }, "border_usage": "nenhuma borda reta — a 'moldura' é orgânica (respingo/rasgo), não geométrica", "divider_style": "floreio caligráfico vermelho sob o wordmark, não uma linha reta" },
+        "elevation": { "shadow_style": "nenhuma", "levels": { "low": "nenhuma", "medium": "nenhuma", "high": "nenhuma" }, "depth_cues": "grão/textura de papel cria profundidade tátil, não sombra" },
+        "iconography": { "style": "dois pontos vermelhos decorativos (bullet ornamental) junto às legendas 'Social'/'group'", "stroke_weight": "n/a", "size_scale": "pequeno, ~4px", "preferred_set": "ornamento custom, não ícone de biblioteca" },
+        "motion": { "easing": "não observável (estático)", "duration_scale": { "micro": "n/a", "normal": "n/a", "macro": "n/a" }, "entrance_pattern": "presumido: o respingo poderia 'pingar'/revelar-se no load como um SVG stroke-draw", "exit_pattern": "n/a", "philosophy": "cinematic pontual, resto estático" },
+        "components": { "button_style": "n/a", "input_style": "n/a", "card_style": "n/a", "navigation_pattern": "n/a", "modal_style": "n/a", "list_style": "n/a", "component_notes": "o dispositivo transportável é a 'moldura de respingo/rasgo nos 4 cantos' como substituto de borda tradicional em telas de destaque (splash, selo de aprovação, estado vazio de peso)" }
+      },
+      "design_style": {
+        "aesthetic": { "mood": ["rebelde", "tribal", "solene", "underground-premium"], "visual_metaphor": "selo/brasão de clube secreto", "era_influence": "gótico medieval (blackletter) reinterpretado como streetwear premium", "genre": "badge/emblem design", "personality_traits": ["orgulhosa", "territorial", "ritualística"], "adjectives": ["áspero", "solene", "dourado-sobre-preto", "assimétrico nas bordas, simétrico no centro"] },
+        "visual_language": { "complexity": "moderate", "ornamentation": "decorative concentrada nas bordas e no floreio, centro limpo", "whitespace_usage": "generoso ao redor do wordmark para ele 'respirar' cercado de caos controlado", "visual_weight_distribution": "moldura pesada, centro leve", "focal_strategy": "single hero element (o wordmark)", "contrast_level": "alto (dourado sobre preto)", "texture_usage": "grão de papel + respingo de tinta, nunca atrás do wordmark em si" },
+        "composition": { "hierarchy_method": "scale contrast + isolamento no centro vazio", "balance_type": "symmetric", "flow_direction": "radial (cantos → centro)", "grouping_strategy": "cada canto é uma unidade própria (edição/ano à direita, categoria à esquerda)", "negative_space_role": "protege a legibilidade do wordmark em meio à moldura caótica" },
+        "imagery": { "photo_treatment": "não aplicável (sem fotografia)", "illustration_style": "respingo de tinta orgânico, textura de papel", "graphic_elements": "floreio caligráfico, pontos ornamentais", "pattern_usage": "grão sutil em todo o fundo", "image_shape": "n/a" },
+        "interaction_feel": { "feedback_style": "não observável", "hover_behavior": "não observável", "transition_personality": "presumido: bouncy elastic combinaria com o tom tribal, mas arriscado para Vermillion (ver nota de fusão)", "loading_style": "não observável", "microinteraction_density": "baixa" },
+        "brand_voice_in_ui": { "tone": "orgulhoso, tribal, direto", "formality": "informal-ritualístico", "cta_style": "direct imperative implícito no selo ('Free', 'Edition 2026')", "empty_state_approach": "não observável", "error_tone": "não observável" }
+      },
+      "visual_effects": {
+        "overview": { "effect_intensity": "subtle-accent", "performance_tier": "lightweight", "fallback_strategy": "a textura de grão vira um PNG estático de baixo custo", "primary_technology": "CSS only" },
+        "background_effects": { "type": "noise-field", "description": "grão de papel sutil cobrindo todo o fundo preto", "technology": "CSS (SVG feTurbulence ou PNG de ruído em overlay com blend-mode)", "params": { "color_palette": ["#0e0d0d"], "speed": "estático", "density": "baixa-média", "opacity": "0.04–0.08", "blend_mode": "overlay" } },
+        "particle_systems": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "count": "n/a", "shape": "n/a", "size_range": "n/a", "movement_pattern": "n/a", "color_behavior": "n/a", "interaction": "none", "spawn_area": "n/a" } },
+        "3d_elements": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "renderer": "n/a", "lighting": "n/a", "camera": "n/a", "materials": "n/a", "geometry": "n/a", "post_processing": [], "interaction_model": "n/a" } },
+        "shader_effects": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "uniforms": "n/a", "vertex_manipulation": "n/a", "fragment_output": "n/a", "noise_type": "n/a", "distortion": "n/a" } },
+        "scroll_effects": { "parallax": { "enabled": false, "layers": "0", "depth_range": "n/a", "speed_curve": "n/a" }, "scroll_triggered_animations": { "enabled": false, "trigger_points": "n/a", "animation_type": "n/a", "scrub_behavior": "none" }, "scroll_morphing": { "enabled": false, "description": "não observado" } },
+        "text_effects": { "type": "none", "description": "wordmark é estático; só o floreio sob ele sugere um traço desenhado", "technology": "CSS", "params": { "split_strategy": "n/a", "animation_per_unit": "n/a", "stagger": "n/a", "effect_style": "n/a" } },
+        "cursor_effects": { "enabled": false, "type": "none", "description": "não observado", "params": { "shape": "n/a", "size": "n/a", "blend_mode": "n/a", "trail": "n/a", "interaction_zone": "n/a" } },
+        "image_effects": { "type": "none", "description": "não observado", "technology": "n/a", "params": { "filter_pipeline": "grão + leve vinheta", "hover_transform": "nenhum", "reveal_animation": "nenhuma", "distortion_type": "none" } },
+        "glassmorphism_neumorphism": { "enabled": false, "style": "none", "params": { "blur_radius": "n/a", "transparency": "n/a", "border_treatment": "n/a", "shadow_type": "n/a", "light_source_angle": "n/a" } },
+        "canvas_drawings": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "draw_method": "n/a", "animation_loop": "n/a", "color_scheme": "n/a", "responsiveness": "n/a", "interaction": "n/a" } },
+        "svg_animations": { "enabled": true, "type": "path-draw", "description": "o floreio caligráfico sob o wordmark e o respingo das bordas são excelentes candidatos a 'desenhar-se' via stroke-dashoffset no primeiro load de uma tela de peso (splash de aprovação/publicação)", "params": { "animation_method": "stroke-dashoffset", "path_morphing": "não necessário", "stroke_animation": "traço único revelando-se em ~600-900ms", "filter_effects": "nenhum" } },
+        "composite_notes": "O dispositivo mais valioso aqui é a 'moldura de respingo orgânico nos cantos' e o 'wordmark blackletter isolado em campo vazio' — ambos fortes candidatos a um WaxSeal/splash de aprovação mais dramático do que o atual, sem precisar de nova cor (o dourado já é --ornament-gold, o vermelho já é --accent-crimson-deep)."
+      }
+    },
+
+    {
+      "meta": {
+        "name": "Reference 4 — Vampyr UI Redesign cover ('vampire-reference.jpg')",
+        "description": "Capa de case de UI: figura encapuzada em contra-plongée contra telhados vitorianos chuvosos com grading vermelho-preto, wordmark tracked com um glifo em destaque vermelho, bloco editorial calmo abaixo em preto chapado com cabeçalho versalete e corpo serifado itálico.",
+        "source_references": ["references/design/vampire-reference.jpg"],
+        "created_at": "2026-11-17"
+      },
+      "design_system": {
+        "color": {
+          "palette_type": "monochromatic quase-preto com grading vermelho e neutros frios no texto",
+          "primary": { "hex": "#080404", "role": "fundo" },
+          "secondary": { "hex": "#2b0f0e", "role": "sombra intermediária do grading" },
+          "accent": { "hex": "#ac392f", "role": "glifo de destaque no wordmark e glow de fundo" },
+          "neutral": { "scale": ["#080404", "#504c4d", "#878181", "#b9b4b4", "#ebe8e9"], "usage": "texto do bloco 'About' em cinza-quase-branco frio, contrastando deliberadamente com o calor do hero acima" },
+          "semantic": { "success": "não observado", "warning": "não observado", "error": "não observado", "info": "não observado" },
+          "surface": { "background": "#080404", "card": "#080404 (bloco 'About' é o mesmo preto, sem elevação)", "elevated": "não observado" },
+          "contrast_strategy": "dois regimes de contraste na mesma página: hero com grading quente de altíssimo contraste, bloco editorial seguinte com baixo contraste tonal (cinza sobre preto) para 'esfriar' o olho",
+          "measurement": { "k": 8, "method": "scripts/measure-colors.mjs (k-means)" },
+          "measured_palette": [
+            { "hex": "#080404", "coverage": 0.6175, "role": "background" },
+            { "hex": "#2b0f0e", "coverage": 0.1818, "role": "unassigned" },
+            { "hex": "#671e18", "coverage": 0.1435, "role": "unassigned" },
+            { "hex": "#ac392f", "coverage": 0.0324, "role": "accent" },
+            { "hex": "#878181", "coverage": 0.0065, "role": "unassigned" },
+            { "hex": "#b9b4b4", "coverage": 0.0064, "role": "unassigned" },
+            { "hex": "#ebe8e9", "coverage": 0.0056, "role": "text" }
+          ]
+        },
+        "typography": {
+          "type_scale": {
+            "display": { "size": "~3.5rem", "weight": "600, tracking expandido", "line_height": "1", "tracking": "0.15em uppercase" },
+            "heading_1": { "size": "~1.25rem", "weight": "600", "line_height": "1.2", "tracking": "0.05em small-caps" },
+            "heading_2": { "size": "n/a", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "heading_3": { "size": "n/a", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "body": { "size": "~1rem", "weight": "400 itálico", "line_height": "1.6", "tracking": "normal" },
+            "body_small": { "size": "~0.8rem", "weight": "400 itálico", "line_height": "1.5", "tracking": "0.02em" },
+            "caption": { "size": "~0.7rem", "weight": "400 itálico", "line_height": "1.4", "tracking": "0.03em" },
+            "overline": { "size": "~0.6rem", "weight": "500", "line_height": "1", "tracking": "0.2em uppercase" }
+          },
+          "font_families": { "heading": "sans condensada tracked para o wordmark do hero; serifa clássica para o 'ABOUT'", "body": "serifa itálica editorial no corpo do 'About'", "mono": "não usado" },
+          "font_style_notes": "duas vozes tipográficas claramente separadas por seção — tracked/sans no hero cinematográfico, serifa itálica calma no editorial — exatamente o padrão que Vermillion já usa (Cinzel só em insígnia, Cormorant em display, Manrope no resto), só que aqui aplicado à escala de uma página inteira"
+        },
+        "spacing": { "base_unit": "8px", "scale": [8, 16, 32, 64, 96], "content_density": "spacious no hero, comfortable no editorial", "section_rhythm": "corte abrupto de seção (hero cinematográfico → bloco plano), sem gradiente de transição" },
+        "layout": { "grid_system": "coluna única centralizada no hero; coluna de leitura à esquerda no bloco editorial", "max_content_width": "~700px no bloco de texto", "columns": "1", "gutter": "32px", "breakpoints": "não observável", "alignment_tendency": "centered no hero, left-aligned no editorial" },
+        "shape": { "border_radius": { "small": "0px", "medium": "0px", "large": "0px", "pill": "n/a" }, "border_usage": "nenhuma borda visível", "divider_style": "corte de cor sólida entre seções, sem linha" },
+        "elevation": { "shadow_style": "nenhuma no bloco editorial; glow atmosférico no hero", "levels": { "low": "nenhuma", "medium": "glow de fundo do hero", "high": "não aplicável" }, "depth_cues": "profundidade por neblina/chuva e contra-plongée no hero; o editorial é deliberadamente plano (2D) para contrastar" },
+        "iconography": { "style": "nenhum ícone de UI nesta peça", "stroke_weight": "n/a", "size_scale": "n/a", "preferred_set": "n/a" },
+        "motion": { "easing": "não observável (estático)", "duration_scale": { "micro": "n/a", "normal": "n/a", "macro": "n/a" }, "entrance_pattern": "presumido: dissolve lento do grão/chuva, texto do wordmark surge depois do fundo assentar", "exit_pattern": "n/a", "philosophy": "cinematic no hero, minimal functional no editorial" },
+        "components": { "button_style": "não observado", "input_style": "não observado", "card_style": "não observado (o 'card' aqui é a seção inteira)", "navigation_pattern": "não observado", "modal_style": "não observado", "list_style": "não observado", "component_notes": "o maior aprendizado não é de componente, é de estrutura de página: 1 hero cinematográfico pesado seguido imediatamente por 1 bloco de leitura deliberadamente calmo — ritmo de 'tensão e alívio' que a landing atual do Vermillion já tenta fazer (hero → manifesto), só que sem o grading atmosférico" }
+      },
+      "design_style": {
+        "aesthetic": { "mood": ["ameaçador", "melancólico", "urbano-vitoriano", "cinematográfico", "contido"], "visual_metaphor": "capa de jogo narrativo AAA ambientado em Londres vitoriana", "era_influence": "Londres vitoriana reimaginada com grading de cinema contemporâneo", "genre": "narrative game key art", "personality_traits": ["taciturna", "vigilante", "predatória-contida"], "adjectives": ["chuvoso", "avermelhado", "monumental", "silencioso"] },
+        "visual_language": { "complexity": "moderate", "ornamentation": "subtle accents (o glifo vermelho isolado é o único ornamento tipográfico)", "whitespace_usage": "o hero usa a neblina como 'vazio'; o editorial usa margem real generosa", "visual_weight_distribution": "hero pesadíssimo no topo, editorial deliberadamente leve embaixo", "focal_strategy": "progressive reveal (figura → wordmark → bloco de leitura)", "contrast_level": "alto no hero, baixo no editorial — contraste de contraste", "texture_usage": "chuva, neblina, grão de filme — nunca atrás de texto corrido" },
+        "composition": { "hierarchy_method": "spatial isolation (contra-plongée) + scale contrast no wordmark", "balance_type": "asymmetric no hero (figura à esquerda, prédios à direita), symmetric no wordmark centralizado por cima", "flow_direction": "vertical, de cima (ameaça) para baixo (explicação calma)", "grouping_strategy": "hero e editorial são dois blocos radicalmente distintos, sem elemento de transição", "negative_space_role": "neblina/chuva como respiro visual dramático, não literal vazio" },
+        "imagery": { "photo_treatment": "render 3D com grading cinematográfico vermelho-preto, grão de filme, chuva", "illustration_style": "n/a (render, não ilustração)", "graphic_elements": "glifo tipográfico recolorido como único acento gráfico", "pattern_usage": "chuva como textura de movimento implícito", "image_shape": "full-bleed sem moldura" },
+        "interaction_feel": { "feedback_style": "não observável", "hover_behavior": "não observável", "transition_personality": "smooth glide lento, deliberadamente sem pressa", "loading_style": "não observável", "microinteraction_density": "muito baixa" },
+        "brand_voice_in_ui": { "tone": "sóbrio, quase documental ('I spent many hours...')", "formality": "formal-narrativo", "cta_style": "subtle suggestion", "empty_state_approach": "não observável", "error_tone": "não observável" }
+      },
+      "visual_effects": {
+        "overview": { "effect_intensity": "moderate", "performance_tier": "medium", "fallback_strategy": "a chuva/neblina vira uma imagem estática pré-renderizada em dispositivos fracos", "primary_technology": "CSS + Canvas 2D (para chuva, se recriado na web)" },
+        "background_effects": { "type": "generative-art", "description": "chuva fina caindo + neblina avermelhada subindo dos telhados, com grading de cor vermelho-preto por cima de tudo", "technology": "Canvas 2D (partículas de chuva) + CSS gradient overlay para o grading", "params": { "color_palette": ["#ac392f", "#671e18", "#080404"], "speed": "chuva rápida e constante, neblina muito lenta", "density": "chuva média, neblina baixa-translúcida", "opacity": "overlay de grading em ~0.3-0.4", "blend_mode": "multiply para o grading, screen para o glow atrás da figura" } },
+        "particle_systems": { "enabled": true, "type": "custom (chuva)", "description": "linhas finas de chuva caindo em diagonal, densidade baixa-média, sem interação do usuário", "technology": "Canvas 2D", "params": { "count": "80-150 partículas simultâneas", "shape": "linha fina (1-2px)", "size_range": "8-20px de comprimento", "movement_pattern": "queda diagonal constante", "color_behavior": "cinza-azulado translúcido, sem variação", "interaction": "none", "spawn_area": "topo da viewport, largura total" } },
+        "3d_elements": { "enabled": false, "type": "scene-bg (na peça original, não recriação web)", "description": "a cena em si foi provavelmente renderizada em engine de jogo; na aplicação web isto vira uma imagem/vídeo de fundo, não um elemento 3D ao vivo", "technology": "pré-renderizado", "params": { "renderer": "n/a para a versão web", "lighting": "rim light vermelho por trás da figura", "camera": "contra-plongée (baixo para cima)", "materials": "n/a", "geometry": "n/a", "post_processing": ["bloom", "film grain", "chromatic aberration leve"], "interaction_model": "nenhum (estático na web)" } },
+        "shader_effects": { "enabled": false, "type": "none", "description": "o grading pode ser replicado com CSS filter/gradient, sem exigir shader GLSL custom", "technology": "CSS filter", "params": { "uniforms": "n/a", "vertex_manipulation": "n/a", "fragment_output": "n/a", "noise_type": "film grain (não perlin)", "distortion": "none" } },
+        "scroll_effects": { "parallax": { "enabled": true, "layers": "3 (figura, prédios, chuva)", "depth_range": "moderado, 10-40px de deslocamento relativo", "speed_curve": "linear com leve ease" }, "scroll_triggered_animations": { "enabled": true, "trigger_points": "saída do hero / entrada do bloco 'About'", "animation_type": "fade entre o grading quente e o preto chapado do editorial", "scrub_behavior": "scrub leve ligado à posição de scroll" }, "scroll_morphing": { "enabled": false, "description": "não observado" } },
+        "text_effects": { "type": "color-shift", "description": "o glifo único recolorido em vermelho dentro do wordmark branco é um tratamento estático, não animado — mas é facilmente adaptável a um 'acender' no load", "technology": "CSS", "params": { "split_strategy": "by-char (só o glifo isolado)", "animation_per_unit": "opcional: esse glifo pulsa um glow sutil continuamente", "stagger": "n/a", "effect_style": "destaque cromático pontual" } },
+        "cursor_effects": { "enabled": false, "type": "none", "description": "não observado", "params": { "shape": "n/a", "size": "n/a", "blend_mode": "n/a", "trail": "n/a", "interaction_zone": "n/a" } },
+        "image_effects": { "type": "none", "description": "não há interação de hover nesta peça (é uma capa estática)", "technology": "CSS filter", "params": { "filter_pipeline": "grading vermelho-preto + grão + vinheta", "hover_transform": "nenhum", "reveal_animation": "fade-in no load", "distortion_type": "none" } },
+        "glassmorphism_neumorphism": { "enabled": false, "style": "none", "params": { "blur_radius": "n/a", "transparency": "n/a", "border_treatment": "n/a", "shadow_type": "n/a", "light_source_angle": "n/a" } },
+        "canvas_drawings": { "enabled": true, "type": "generative-lines", "description": "chuva como o único desenho generativo necessário; leve e replicável em Canvas 2D simples", "technology": "Canvas 2D", "params": { "draw_method": "linhas desenhadas por frame com requestAnimationFrame", "animation_loop": "contínuo, baixo custo de CPU", "color_scheme": "cinza translúcido sobre o grading vermelho", "responsiveness": "redesenha a densidade proporcional à largura da viewport", "interaction": "none" } },
+        "svg_animations": { "enabled": false, "type": "none", "description": "não observado", "params": { "animation_method": "n/a", "path_morphing": "n/a", "stroke_animation": "n/a", "filter_effects": "n/a" } },
+        "composite_notes": "Esta é a referência mais diretamente aplicável ao tema do Vermillion (Londres vitoriana + vampiro), mas o efeito mais custoso (chuva em Canvas) deve ser usado com moderação extrema — só no hero da landing, nunca dentro do app autenticado, e sempre desabilitado sob `prefers-reduced-motion` (ver regra de movimento do Vermillion, que já proíbe vídeo de fundo e parallax >1 camada — este efeito precisa ser domado para caber nessa regra, não a violar)."
+      }
+    },
+
+    {
+      "meta": {
+        "name": "Reference 5 — Vampire dossier spread ('vampire2-reference.png')",
+        "description": "Dois painéis de 'dossiê de personagem' empilhados: molduras de canto ornamentadas simétricas, letras-capitulares circulares ornamentadas iniciando cada parágrafo, cruz ornamental vermelha grande, emblema de lua-crescente+morcego, retrato em duotone vermelho semi-transparente atrás do texto, legenda vertical lateral.",
+        "source_references": ["references/design/vampire2-reference.png"],
+        "created_at": "2026-11-17"
+      },
+      "design_system": {
+        "color": {
+          "palette_type": "monochromatic vinho-preto com neutros frios no corpo de texto",
+          "primary": { "hex": "#0a0505", "role": "fundo" },
+          "secondary": { "hex": "#241616", "role": "painel/moldura" },
+          "accent": { "hex": "#3a2d2d", "role": "sombra da cruz/ornamento" },
+          "neutral": { "scale": ["#0a0505", "#3a2d2d", "#585050", "#7a7171", "#999090", "#b3aaaa", "#d2cbcd"], "usage": "corpo de texto do dossiê em cinza-claro-frio sobre o retrato em duotone, nunca em dourado puro (reservado ao ornamento)" },
+          "semantic": { "success": "não observado", "warning": "não observado", "error": "não observado", "info": "não observado" },
+          "surface": { "background": "#0a0505", "card": "#241616", "elevated": "não observado" },
+          "contrast_strategy": "texto claro-frio sobreposto a fotografia em duotone vermelho-escuro com opacidade reduzida — o fundo nunca compete com a legibilidade porque é escurecido deliberadamente sob o texto",
+          "measurement": { "k": 8, "method": "scripts/measure-colors.mjs (k-means)" },
+          "measured_palette": [
+            { "hex": "#0a0505", "coverage": 0.4604, "role": "background" },
+            { "hex": "#241616", "coverage": 0.256, "role": "accent" },
+            { "hex": "#3a2d2d", "coverage": 0.1112, "role": "unassigned" },
+            { "hex": "#585050", "coverage": 0.0496, "role": "unassigned" },
+            { "hex": "#999090", "coverage": 0.0401, "role": "unassigned" },
+            { "hex": "#7a7171", "coverage": 0.0396, "role": "unassigned" },
+            { "hex": "#b3aaaa", "coverage": 0.0296, "role": "unassigned" },
+            { "hex": "#d2cbcd", "coverage": 0.0135, "role": "text" }
+          ]
+        },
+        "typography": {
+          "type_scale": {
+            "display": { "size": "n/a (sem display grande nesta peça)", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "heading_1": { "size": "n/a", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "heading_2": { "size": "n/a", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "heading_3": { "size": "n/a", "weight": "n/a", "line_height": "n/a", "tracking": "n/a" },
+            "body": { "size": "~0.95rem", "weight": "400 serifada", "line_height": "1.5", "tracking": "normal" },
+            "body_small": { "size": "~0.8rem", "weight": "400", "line_height": "1.4", "tracking": "normal" },
+            "caption": { "size": "~0.65rem", "weight": "500", "line_height": "1.3", "tracking": "0.3em uppercase (legenda vertical)" },
+            "overline": { "size": "~1.5rem (a letra-capitular em si)", "weight": "600", "line_height": "1", "tracking": "normal" }
+          },
+          "font_families": { "heading": "serifa ornamental só na letra-capitular", "body": "serifa clássica legível no corpo todo do dossiê", "mono": "não usado" },
+          "font_style_notes": "corpo de texto inteiramente serifado (não sans) — é lore/narrativa, não UI de formulário; a letra-capitular circular é o único elemento decorativo dentro do próprio texto"
+        },
+        "spacing": { "base_unit": "8px", "scale": [8, 16, 24, 32], "content_density": "compact — colunas de texto estreitas, próximas da moldura", "section_rhythm": "dois painéis quase idênticos empilhados, mesmo ritmo repetido" },
+        "layout": { "grid_system": "coluna de texto estreita à direita/esquerda da fotografia, moldura fixa nos 4 cantos", "max_content_width": "~55% da largura do painel para o texto", "columns": "2 (texto + imagem) por painel", "gutter": "16px", "breakpoints": "não observável", "alignment_tendency": "asymmetric (texto de um lado, retrato do outro, invertendo entre os dois painéis)" },
+        "shape": { "border_radius": { "small": "0px", "medium": "0px", "large": "0px", "pill": "n/a" }, "border_usage": "moldura ornamentada nos 4 cantos (não uma borda contínua — cantos desenhados, lados abertos)", "divider_style": "cruz ornamental grande funcionando como divisor visual entre painéis" },
+        "elevation": { "shadow_style": "nenhuma sombra de UI", "levels": { "low": "nenhuma", "medium": "nenhuma", "high": "nenhuma" }, "depth_cues": "profundidade só por sobreposição de camadas (texto sobre foto sobre fundo), sem sombra" },
+        "iconography": { "style": "emblema de lua-crescente + morcego, cruz ornamental grande, letra-capitular circular", "stroke_weight": "fino, ~1-1.5px, estilo gravura", "size_scale": "ornamento grande (cruz) + ornamento pequeno (capitular) coexistindo", "preferred_set": "ilustração custom estilo gravura vitoriana, não ícone de biblioteca" },
+        "motion": { "easing": "não observável (estático)", "duration_scale": { "micro": "n/a", "normal": "n/a", "macro": "n/a" }, "entrance_pattern": "não observável", "exit_pattern": "não observável", "philosophy": "não observável, presume-se estático (é material de lore, tipo 'página de livro')" },
+        "components": { "button_style": "não observado", "input_style": "não observado", "card_style": "painel de dossiê com moldura ornamentada nos cantos + retrato em duotone atrás do texto", "navigation_pattern": "não observado", "modal_style": "não observado", "list_style": "não observado", "component_notes": "ESTE é o padrão de componente mais diretamente reaproveitável no produto: é literalmente um 'cartão de personagem' com moldura ornamentada + foto duotone atrás de texto — o mesmo papel que `CharacterSheet`/`VelvetCard` já cumprem no Vermillion, só que com tratamento visual bem mais rico" }
+      },
+      "design_style": {
+        "aesthetic": { "mood": ["arcano", "erudito", "sedutor-perigoso", "clássico", "ritual"], "visual_metaphor": "página de grimório/dossiê de arquivo secreto escrito à mão", "era_influence": "gravura vitoriana + ocultismo de fim de século", "genre": "character lore dossier", "personality_traits": ["enigmático", "formal", "obcecado por detalhe"], "adjectives": ["ornamentado", "íntimo", "sombrio-erudito", "em camadas"] },
+        "visual_language": { "complexity": "rich", "ornamentation": "heavily ornamented nas molduras e letra-capitular, mas o corpo de texto em si fica limpo", "whitespace_usage": "moderado — colunas de texto estreitas deixam bastante fundo escuro visível ao redor", "visual_weight_distribution": "moldura e cruz pesadas nas bordas, texto leve no centro de leitura", "focal_strategy": "distributed interest (retrato + cruz + texto competem, mas a moldura une tudo)", "contrast_level": "moderado (texto cinza-claro sobre foto escurecida)", "texture_usage": "a própria fotografia funciona como textura de fundo, nunca papel genérico" },
+        "composition": { "hierarchy_method": "typographic hierarchy (capitular > corpo) + spatial isolation do retrato", "balance_type": "mosaic (vários elementos de peso similar coexistindo)", "flow_direction": "leitura em coluna, de cima para baixo, painel a painel", "grouping_strategy": "cada painel é uma unidade de lore completa (como uma página de livro)", "negative_space_role": "o fundo quase-preto ao redor da moldura dá a sensação de página isolada no vazio, como um artefato" },
+        "imagery": { "photo_treatment": "duotone vermelho-escuro com opacidade reduzida, quase se fundindo ao fundo", "illustration_style": "gravura vitoriana linear para os ornamentos", "graphic_elements": "moldura de cantos, cruz, emblema lua+morcego, letra-capitular circular", "pattern_usage": "nenhum padrão repetido — cada ornamento é único e posicionado deliberadamente", "image_shape": "retangular sangrando até a borda do painel, sem moldura própria (a moldura é do painel, não da foto)" },
+        "interaction_feel": { "feedback_style": "não observável", "hover_behavior": "não observável", "transition_personality": "não observável", "loading_style": "não observável", "microinteraction_density": "não observável (é material estático de lore, não UI)" },
+        "brand_voice_in_ui": { "tone": "narrativo em 3ª pessoa, registro literário denso", "formality": "formal-literário", "cta_style": "não aplicável (não há CTA, é texto de lore)", "empty_state_approach": "não observável", "error_tone": "não observável" }
+      },
+      "visual_effects": {
+        "overview": { "effect_intensity": "subtle-accent", "performance_tier": "lightweight", "fallback_strategy": "a moldura e o duotone são decoração estática, degradam para imagem comum sem perda funcional", "primary_technology": "CSS only (SVG para a moldura)" },
+        "background_effects": { "type": "none", "description": "o 'fundo' aqui é a própria fotografia tratada, não um efeito generativo separado", "technology": "CSS", "params": { "color_palette": ["#241616", "#0a0505"], "speed": "n/a", "density": "n/a", "opacity": "n/a", "blend_mode": "normal" } },
+        "particle_systems": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "count": "n/a", "shape": "n/a", "size_range": "n/a", "movement_pattern": "n/a", "color_behavior": "n/a", "interaction": "none", "spawn_area": "n/a" } },
+        "3d_elements": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "renderer": "n/a", "lighting": "n/a", "camera": "n/a", "materials": "n/a", "geometry": "n/a", "post_processing": [], "interaction_model": "n/a" } },
+        "shader_effects": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "uniforms": "n/a", "vertex_manipulation": "n/a", "fragment_output": "n/a", "noise_type": "n/a", "distortion": "n/a" } },
+        "scroll_effects": { "parallax": { "enabled": false, "layers": "0", "depth_range": "n/a", "speed_curve": "n/a" }, "scroll_triggered_animations": { "enabled": true, "trigger_points": "entrada do painel na viewport (se usado em página rolável)", "animation_type": "fade-up suave do painel inteiro", "scrub_behavior": "none" }, "scroll_morphing": { "enabled": false, "description": "não observado" } },
+        "text_effects": { "type": "none", "description": "a letra-capitular é um elemento gráfico fixo, não uma animação de texto", "technology": "CSS ::first-letter + SVG de fundo", "params": { "split_strategy": "n/a", "animation_per_unit": "n/a", "stagger": "n/a", "effect_style": "n/a" } },
+        "cursor_effects": { "enabled": false, "type": "none", "description": "não observado", "params": { "shape": "n/a", "size": "n/a", "blend_mode": "n/a", "trail": "n/a", "interaction_zone": "n/a" } },
+        "image_effects": { "type": "none", "description": "o duotone é um tratamento fixo de produção, não um efeito de hover", "technology": "CSS filter (grayscale + sepia/hue-rotate para duotone) + gradiente de opacidade", "params": { "filter_pipeline": "grayscale(1) sepia(0.3) hue-rotate(-20deg) + gradiente de opacidade para escurecer sob o texto", "hover_transform": "nenhum na peça original; candidato a leve zoom (1.0→1.03) se usado como retrato interativo", "reveal_animation": "nenhuma", "distortion_type": "none" } },
+        "glassmorphism_neumorphism": { "enabled": false, "style": "none", "params": { "blur_radius": "n/a", "transparency": "n/a", "border_treatment": "n/a", "shadow_type": "n/a", "light_source_angle": "n/a" } },
+        "canvas_drawings": { "enabled": false, "type": "none", "description": "não observado", "technology": "n/a", "params": { "draw_method": "n/a", "animation_loop": "n/a", "color_scheme": "n/a", "responsiveness": "n/a", "interaction": "n/a" } },
+        "svg_animations": { "enabled": true, "type": "decorative-loop", "description": "a moldura de cantos e a cruz ornamental são formas lineares ideais para SVG — poderiam ganhar um 'desenho' sutil de stroke no primeiro carregamento do dossiê, ecoando o mesmo dispositivo da Referência 3", "params": { "animation_method": "stroke-dashoffset em cada canto da moldura", "path_morphing": "não necessário", "stroke_animation": "revelação única no mount, ~500ms, nunca em loop contínuo", "filter_effects": "nenhum" } },
+        "composite_notes": "Dispositivo-chave para o Vermillion: moldura ornamentada nos 4 cantos (SVG, leve) + retrato em duotone semi-transparente atrás de texto + letra-capitular — os três cabem perfeitamente na 'Ficha Viva' e no `CharacterSheet` sem exigir nenhuma tecnologia pesada, e sem contradizer a regra existente do Vermillion de 'nunca textura atrás de corpo de texto formal' DESDE QUE o duotone fique reservado a blocos de leitura de lore/história (não a formulários do wizard) e sempre com overlay escurecedor suficiente para manter o contraste medido em docs/DESIGN_SYSTEM.md."
+      }
+    }
+  ],
+
+  "target_fusion_dna": {
+    "meta": {
+      "name": "Vermillion — Refinamento Cinematográfico (grimório vampírico digital)",
+      "description": "DNA de design alvo: a identidade de cor já existente do Vermillion (obsidian/ebony/wine/ivory/ornament-gold/crimson) permanece intocada; o que muda é a profundidade atmosférica, a ornamentação discreta e o peso editorial, fundindo os dispositivos mais leves e mais alinhados ao gênero das 5 referências (grão de filme, vinheta/glow radial, moldura ornamentada de canto, letra-capitular, duotone de retrato, selo com traço revelado) com as regras de contraste e de moderação já documentadas em docs/DESIGN_SYSTEM.md. Nenhum efeito pesado (WebGL, partículas 3D, shaders custom) é adotado — o gênero 'aristocrático contemporâneo' pede contenção, não espetáculo.",
+      "source_references": [
+        "references/design/geral-reference.png",
+        "references/design/hero-reference.jpg",
+        "references/design/aesthetic-refernce.jpg",
+        "references/design/vampire-reference.jpg",
+        "references/design/vampire2-reference.png",
+        "src/app/globals.css (fonte de verdade da paleta atual — preservada)",
+        "docs/DESIGN_SYSTEM.md (regras de contraste, moderação do carmesim e movimento já em vigor)"
+      ],
+      "created_at": "2026-11-17"
+    },
+    "design_system": {
+      "color": {
+        "palette_type": "monochromatic dark com um único acento quente (carmesim) e um metal frio (ouro antigo) — inalterado",
+        "primary": { "hex": "#941D36", "role": "accent-crimson-deep — preenchimento de botão primário, selo, barra de progresso ativa (NUNCA como texto sobre fundo escuro)" },
+        "secondary": { "hex": "#21161D", "role": "surface-wine — superfície elevada (modais, popovers, hover, camada 'profunda' de glow)" },
+        "accent": { "hex": "#B79A72", "role": "ornament-gold — bordas, filetes, ornamento, foco visível, moldura de canto" },
+        "neutral": { "scale": ["#0B0A0C", "#171016", "#21161D", "#AE9DA2", "#E6DDD1"], "usage": "bg-obsidian e surface-ebony/wine formam a escala escura; ink-muted e ink-ivory são os dois únicos tons de texto, do secundário ao principal" },
+        "semantic": { "success": "não definido no sistema atual — se necessário, usar ornament-gold com ícone (nunca verde genérico, quebraria a paleta)", "warning": "accent-crimson-bright com ícone (já é o padrão de 'ajustes pedidos' no StatusBadge)", "error": "accent-crimson-bright + ícone + texto, nunca só borda colorida", "info": "ink-muted + ícone" },
+        "surface": { "background": "#0B0A0C", "card": "#171016", "elevated": "#21161D" },
+        "contrast_strategy": "subtle layers — três superfícies escuras tonalmente próximas, texto resolvido só com ink-ivory/ink-muted, acento quente reservado e moderado (regra de 1 elemento carmesim por 'dossiê', docs/DESIGN_SYSTEM.md §1) — o refinamento adiciona PROFUNDIDADE (glow, vinheta, grão) dentro dessas mesmas superfícies, nunca uma 4ª cor",
+        "measurement": { "k": "n/a — não medido por screenshot", "method": "valores lidos diretamente do código-fonte (src/app/globals.css), não estimados visualmente" },
+        "measured_palette": [
+          { "hex": "#0B0A0C", "coverage": "n/a", "role": "surface.background (--bg-obsidian)" },
+          { "hex": "#171016", "coverage": "n/a", "role": "surface.card (--surface-ebony)" },
+          { "hex": "#21161D", "coverage": "n/a", "role": "surface.elevated (--surface-wine)" },
+          { "hex": "#E6DDD1", "coverage": "n/a", "role": "texto principal (--ink-ivory)" },
+          { "hex": "#AE9DA2", "coverage": "n/a", "role": "texto secundário (--ink-muted)" },
+          { "hex": "#B79A72", "coverage": "n/a", "role": "ornamento/borda/foco (--ornament-gold)" },
+          { "hex": "#941D36", "coverage": "n/a", "role": "preenchimento de destaque (--accent-crimson-deep)" },
+          { "hex": "#D6445C", "coverage": "n/a", "role": "texto de link/erro sobre fundo escuro (--accent-crimson-bright)" }
+        ]
+      },
+      "typography": {
+        "type_scale": {
+          "display": { "size": "3.5rem/1.05", "weight": "Cormorant Garamond 600", "line_height": "1.05", "tracking": "normal" },
+          "heading_1": { "size": "2.5rem/1.1", "weight": "Cormorant Garamond 600", "line_height": "1.1", "tracking": "normal" },
+          "heading_2": { "size": "1.875rem/1.15", "weight": "Cormorant Garamond 500", "line_height": "1.15", "tracking": "normal" },
+          "heading_3": { "size": "1.375rem/1.2", "weight": "Cormorant Garamond 500", "line_height": "1.2", "tracking": "normal" },
+          "body": { "size": "1rem/1.6", "weight": "Manrope 400", "line_height": "1.6", "tracking": "normal" },
+          "body_small": { "size": "0.875rem/1.5", "weight": "Manrope 400", "line_height": "1.5", "tracking": "normal" },
+          "caption": { "size": "0.75rem/1", "weight": "Cinzel 500", "line_height": "1", "tracking": "0.08em uppercase" },
+          "overline": { "size": "0.7rem/1", "weight": "Cinzel 500", "line_height": "1", "tracking": "0.12em uppercase" }
+        },
+        "font_families": { "heading": "Cormorant Garamond (display/H1-H3/números de atributo) — inalterado", "body": "Manrope (UI, formulário, corpo) — inalterado", "mono": "Manrope (sem fonte monoespaçada dedicada)" },
+        "font_style_notes": "trio existente preservado (Cormorant display serifado fino / Manrope sans humanista para UI / Cinzel só em insígnia-badge-wordmark) — o refinamento ADICIONA um 4º uso pontual de Cormorant em itálico para citações de lore/história (inspirado nas Refs 1 e 4), e eleva a letra-capitular como novo recurso tipográfico em blocos de história/lore (inspirado na Ref 5), sem introduzir nenhuma família nova"
+      },
+      "spacing": { "base_unit": "4px", "scale": [4, 8, 12, 16, 24, 32, 48, 64], "content_density": "comfortable (mantido) — o refinamento não adensa nem espaça a UI funcional (formulários, wizard), só os momentos editoriais (landing, Ficha Viva, dossiês) ganham mais respiro vertical entre seções, como nas Refs 1 e 4", "section_rhythm": "mantido: alternância de largura (hero full-bleed com overlay atmosférico → coluna de leitura max-w-3xl → grid max-w-5xl → faixa full-bleed de rodapé), reforçada com transições mais deliberadas entre seções (Ref 1/Ref 4)" },
+      "layout": { "grid_system": "mantido: shell de app com `md:grid-cols-[200px_1fr] lg:grid-cols-[220px_1fr_320px]` (stepper · conteúdo · prévia); páginas editoriais em coluna única centralizada", "max_content_width": "max-w-3xl (leitura) / max-w-5xl (grids de cartão) / max-w-6xl (shell de página) — inalterado", "columns": "1 mobile → 2 tablet → 3 desktop nos grids de cartão (mantido)", "gutter": "24px (gap-6), mantido", "breakpoints": "Tailwind padrão: sm 640 / md 768 / lg 1024 / xl 1280 — inalterado", "alignment_tendency": "mixed (centrado em conteúdo editorial, assimétrico em telas de app com sidebar) — inalterado, mas a Ref 5 sugere reforçar a assimetria texto/retrato na Ficha Viva (coluna de leitura estreita ao lado do retrato em duotone)" },
+      "shape": { "border_radius": { "small": "2.4px (radius-sm atual)", "medium": "3.2px (radius-md atual)", "large": "4px (radius atual)", "pill": "999px só em badges/botões pequenos, se necessário" }, "border_usage": "borda 1px ornament-gold a 40% (mantido como regra-mestra) — o refinamento troca a borda RETA simples por uma moldura de CANTO ornamentada (SVG, 4 cantos desenhados, lados abertos) em momentos de peso (Ficha Viva publicada, selo de aprovação, dossiê de clã no Códice), inspirada diretamente na Ref 5, sem abandonar a borda reta simples no resto da UI (formulários, cards de lista)", "divider_style": "LoreDivider existente (filete + losango SVG) mantido como padrão geral; ganha uma variante 'traço revelado' (stroke-dashoffset, ~600ms no mount) para momentos de transição de peso, inspirada nas Refs 3 e 5" },
+      "elevation": { "shadow_style": "soft diffused interna (mantida a sombra inset sutil de papel no topo do VelvetCard) — o refinamento ADICIONA glow atmosférico (radial-gradient difuso em crimson-deep/wine, nunca drop-shadow duro) em zonas de destaque: hero da landing, selo de aprovação/publicação, retrato de personagem", "levels": { "low": "sombra inset atual (0 1px 0 rgba(ink-ivory,0.04))", "medium": "+ glow radial sutil crimson-deep a 8-15% em cartões 'elevated' (surface-wine) e no hero", "high": "+ vinheta (radial-gradient escurecendo as bordas) reservada a telas de tela cheia (landing hero, splash de aprovação) — nunca em cards de lista" }, "depth_cues": "camadas tonais entre as 3 superfícies (mantido) + glow/vinheta atmosférica (novo, sempre sutil — ver `visual_effects`) + grão de filme opcional em telas de destaque" },
+      "iconography": { "style": "lucide-react line icons (mantido) para UI funcional; SVG geométrico próprio (mantido: LoreDivider, WaxSeal) para ornamento de marca — o refinamento ADICIONA um conjunto pequeno de ornamentos de canto e emblemas (lua-crescente/morcego-silhueta simplificado, inspirado na Ref 5) reservados a 3-4 lugares de peso (Códice, dossiê de clã, splash de aprovação), nunca como wallpaper repetido", "stroke_weight": "1-1.5px (lucide default + SVGs próprios), mantido", "size_scale": "16/20/24px para ícones de UI (mantido); ornamentos de marca em 40-96px (WaxSeal) e molduras de canto proporcionais ao cartão", "preferred_set": "lucide-react + SVG autoral — nunca ícone de terceiro/clip-art (regra já existente, reforçada)" },
+      "motion": { "easing": "ease-out (entrada) / ease-in (saída), 180-420ms — mantido integralmente", "duration_scale": { "micro": "150-200ms (hover, foco)", "normal": "250-360ms (PageTransition, fade+translateY atual)", "macro": "500-900ms (reservado só a: stroke-draw de moldura/selo, vinheta de hero assentando)" }, "entrance_pattern": "fade + translateY(8px) mantido como padrão geral; ADICIONA stroke-dashoffset reveal (500-900ms) só para moldura ornamentada/selo em momentos de peso (aprovação, publicação) — nunca como entrada padrão de card", "exit_pattern": "mantido (fade/scale leve, sem novidade)", "philosophy": "cinematic contido — mantém a proibição explícita de scroll-jacking, splash screen, vídeo de fundo e parallax >1 camada (docs/DESIGN_SYSTEM.md §5); o refinamento usa glow/grão/vinheta como ATMOSFERA ESTÁTICA ou de entrada única, nunca como animação contínua chamativa" },
+      "components": {
+        "button_style": "mantido (preenchido crimson-deep / outline ornament-gold, radius-sm, uppercase tracked Cinzel-like via font-badge) — sem mudança estrutural, só o estado hover pode ganhar um glow sutil de 2-4px em vez de só mudança de opacidade",
+        "input_style": "mantido (borda 1px, bg-background, focus:border-ornament-gold) — sem textura, sem glass, conforme regra existente de 'nunca textura atrás de formulário'",
+        "card_style": "VelvetCard mantido como padrão geral; ganha uma variante 'dossiê ornamentado' (moldura de canto SVG + glow sutil) para Ficha Viva publicada e cartões de clã no Códice — nunca para cards de lista/grid simples (Meu Grimório, galeria), que continuam no tratamento atual por volume/performance",
+        "navigation_pattern": "GothicShell mantido (header fino, footer legal) — sem mudança estrutural",
+        "modal_style": "Dialog (Radix) mantido — pode ganhar glow sutil na borda em confirmações de peso (arquivar, aprovar), não em todo modal",
+        "list_style": "grids de card mantidos (1→2→3 colunas) — sem mudança",
+        "component_notes": "Novo componente proposto: `OrnateFrame` (moldura de canto SVG reutilizável, 4 variantes de tamanho) e `DropCapLore` (letra-capitular circular para blocos de história/lore) — ambos aditivos, nenhum componente existente é removido ou renomeado"
+      }
+    },
+    "design_style": {
+      "aesthetic": {
+        "mood": ["aristocrático", "cinematográfico", "contido", "noturno", "editorial-luxuoso"],
+        "visual_metaphor": "grimório vampírico digital — dossiê confidencial de uma sociedade secreta em Londres, 2026",
+        "era_influence": "gótico vitoriano filtrado por grading de cinema contemporâneo e tipografia editorial de luxo — nunca pastiche medieval literal",
+        "genre": "luxury editorial aplicado a produto de utilidade (criador de ficha de RPG)",
+        "personality_traits": ["discreta", "confiante", "precisa", "levemente ameaçadora", "nunca histriônica"],
+        "adjectives": ["obsidiana", "aveludado", "dourado-antigo", "comedido", "atmosférico"]
+      },
+      "visual_language": {
+        "complexity": "moderate (mantido) — rich só em momentos de peso (Ficha Viva publicada, Códice, splash de aprovação), nunca na UI funcional de formulário/wizard",
+        "ornamentation": "subtle accents como padrão geral (mantido); decorative pontual e deliberado nos 3-4 momentos de peso identificados — nunca heavily ornamented em toda a superfície (isso quebraria a regra de 'máximo 1 etiqueta de canto por card', docs/DESIGN_SYSTEM.md §4)",
+        "whitespace_usage": "generoso nas páginas editoriais (landing, Códice), comfortable nas páginas de app (wizard, Conselho) — mantido, com leve aumento de respiro vertical entre seções editoriais inspirado nas Refs 1/4",
+        "visual_weight_distribution": "topo pesado em telas de destaque (hero com glow/vinheta), leve e funcional no resto — ecoa o padrão 'tensão e alívio' da Ref 4",
+        "focal_strategy": "single hero element por tela (mantido) — nunca dois focos de carmesim competindo (regra já existente)",
+        "contrast_level": "moderado (subtle layers), mantido — os efeitos novos de profundidade (glow/vinheta/grão) são sempre sutis o bastante para não comprometer os contrastes já medidos em docs/DESIGN_SYSTEM.md §1",
+        "texture_usage": "grão de filme finíssimo (opcional, 0.02-0.04 de opacidade) só em zonas decorativas isoladas (hero da landing, fundo do splash de aprovação) — EXPLICITAMENTE nunca atrás de corpo de texto ou formulário, mantendo a regra existente de §4"
+      },
+      "composition": {
+        "hierarchy_method": "scale contrast (tipografia) + spatial isolation (mantido) — reforçado com glow/vinheta como camada adicional de ênfase em heros e selos",
+        "balance_type": "symmetric em telas editoriais centradas (landing, manifesto); asymmetric em telas de app com sidebar (wizard, Ficha Viva) — mantido, com a Ficha Viva podendo reforçar a assimetria texto/retrato inspirada na Ref 5",
+        "flow_direction": "vertical top-to-bottom (mantido)",
+        "grouping_strategy": "cada seção/card é uma unidade fechada (mantido) — 'tensão e alívio' entre hero cinematográfico e bloco de leitura calmo (Ref 4) reforça esse padrão já presente na landing (hero → manifesto)",
+        "negative_space_role": "respiro que protege a legibilidade e dá peso ao pouco ornamento usado (mantido e reforçado)"
+      },
+      "imagery": {
+        "photo_treatment": "quando houver retrato de personagem: duotone sutil em tons de crimson-deep/wine sobre o retrato, sempre com overlay escurecedor suficiente para manter contraste do texto por cima (inspirado na Ref 5) — nunca fotografia saturada/colorida crua",
+        "illustration_style": "SVG geométrico linear autoral (mantido: LoreDivider, WaxSeal) — expandido com moldura de canto e emblema lua/morcego no mesmo estilo de traço fino",
+        "graphic_elements": "losango/selo (mantido), moldura de canto SVG (novo), letra-capitular circular (novo) — todos como ornamento isolado, nunca padrão repetido de fundo",
+        "pattern_usage": "nenhum padrão repetido atrás de conteúdo (mantido, regra explícita de §4)",
+        "image_shape": "retangular de cantos quase retos (radius-sm), moldura dourada fina (mantido); retrato com vinheta leve de máscara (já documentado em §4, reforçado com o duotone da Ref 5)"
+      },
+      "interaction_feel": {
+        "feedback_style": "mantido — ícone + cor + texto, nunca só cor (regra de acessibilidade existente)",
+        "hover_behavior": "mantido (mudança de cor/borda) — ganha glow sutil de 2-4px em CTAs primários e cards 'elevated', nunca em inputs/listas simples",
+        "transition_personality": "smooth glide contido (mantido) — nunca bouncy/elastic (isso contradiria o tom 'nunca histriônico')",
+        "loading_style": "AutosaveIndicator existente mantido — sem mudança",
+        "microinteraction_density": "baixa a moderada (mantida) — o refinamento não aumenta a quantidade de microinterações, só a qualidade atmosférica das já existentes"
+      },
+      "brand_voice_in_ui": {
+        "tone": "literário-curatorial em 2ª pessoa comedida (mantido, ver copy atual da landing: 'Toda eternidade começa com um nome')",
+        "formality": "formal-editorial com calor pontual (mantido)",
+        "cta_style": "friendly invitation com leve teatralidade (mantido: 'Entre na noite')",
+        "empty_state_approach": "mantido (ilustração/texto que convida, nunca erro genérico)",
+        "error_tone": "mantido (ícone + accent-crimson-bright + texto claro)"
+      }
+    },
+    "visual_effects": {
+      "overview": {
+        "effect_intensity": "subtle-accent",
+        "performance_tier": "lightweight",
+        "fallback_strategy": "todo efeito novo (glow, vinheta, grão, stroke-reveal) degrada para CSS estático sob `prefers-reduced-motion: reduce` (reaproveitando o hook `useReducedMotion` e a regra global já existentes em globals.css) e é puramente decorativo — nunca bloqueia conteúdo ou funcionalidade se desabilitado",
+        "primary_technology": "CSS only (gradients, filter, mask, @property se necessário) + SVG (molduras, selos, traço revelado) — explicitamente SEM Canvas/WebGL/Three.js/shaders, por serem incompatíveis com o 'nunca espetáculo' do gênero e com o orçamento de performance de uma SPA de formulário"
+      },
+      "background_effects": {
+        "type": "mesh-gradient (glow radial) + noise-field (grão opcional)",
+        "description": "glow radial difuso em crimson-deep/surface-wine atrás de heros e selos (evolução do radial-gradient já existente na landing, inspirado na Ref 2), com grão de filme finíssimo opcional só em telas de tela cheia (inspirado nas Refs 2 e 3)",
+        "technology": "CSS radial-gradient / conic-gradient + SVG feTurbulence (grão) como camada `::before` isolada, nunca atrás de texto",
+        "params": { "color_palette": ["#941D36", "#21161D", "#0B0A0C"], "speed": "estático ou respiração muito lenta de opacidade (8-12s, loop suave) só no hero da landing", "density": "baixa", "opacity": "glow 0.12-0.2; grão 0.02-0.04", "blend_mode": "screen (glow) / overlay (grão)" }
+      },
+      "particle_systems": {
+        "enabled": false,
+        "type": "none",
+        "description": "deliberadamente não adotado — a chuva generativa da Ref 4 é bonita mas pesada e contraria a regra existente 'proibido vídeo de fundo/parallax >1 camada'; o mesmo efeito atmosférico é alcançado com glow+grão estáticos",
+        "technology": "n/a",
+        "params": { "count": "n/a", "shape": "n/a", "size_range": "n/a", "movement_pattern": "n/a", "color_behavior": "n/a", "interaction": "none", "spawn_area": "n/a" }
+      },
+      "3d_elements": {
+        "enabled": false,
+        "type": "none",
+        "description": "fora de escopo — nenhuma das referências exige 3D ao vivo na própria interface (os renders 3D observados são imagens pré-tratadas, não elementos interativos)",
+        "technology": "n/a",
+        "params": { "renderer": "n/a", "lighting": "n/a", "camera": "n/a", "materials": "n/a", "geometry": "n/a", "post_processing": [], "interaction_model": "n/a" }
+      },
+      "shader_effects": {
+        "enabled": false,
+        "type": "none",
+        "description": "não adotado — todo efeito de 'brilho incandescente' das referências é alcançável com CSS gradient/filter, sem necessidade de GLSL",
+        "technology": "n/a",
+        "params": { "uniforms": "n/a", "vertex_manipulation": "n/a", "fragment_output": "n/a", "noise_type": "n/a", "distortion": "n/a" }
+      },
+      "scroll_effects": {
+        "parallax": { "enabled": false, "layers": "0", "depth_range": "n/a", "speed_curve": "n/a" },
+        "scroll_triggered_animations": { "enabled": true, "trigger_points": "entrada de seção na landing/Códice (IntersectionObserver)", "animation_type": "fade-up (mantido, já implementado via PageTransition/Motion)", "scrub_behavior": "none — mantém a proibição explícita de scroll-jacking" },
+        "scroll_morphing": { "enabled": false, "description": "não adotado, fora do escopo do gênero" }
+      },
+      "text_effects": {
+        "type": "none",
+        "description": "nenhum efeito de texto animado novo — a letra-capitular (`DropCapLore`) é um elemento gráfico estático, não uma animação; o wordmark/display permanece sem glow-pulse contínuo para não virar 'histriônico'",
+        "technology": "CSS ::first-letter (letra-capitular) + SVG de moldura circular de fundo",
+        "params": { "split_strategy": "n/a", "animation_per_unit": "n/a", "stagger": "n/a", "effect_style": "n/a" }
+      },
+      "cursor_effects": { "enabled": false, "type": "none", "description": "não adotado — fora do tom 'nunca histriônico' e sem benefício de acessibilidade/mobile (cursor custom não existe em touch)", "params": { "shape": "n/a", "size": "n/a", "blend_mode": "n/a", "trail": "n/a", "interaction_zone": "n/a" } },
+      "image_effects": {
+        "type": "duotone + reveal-clip",
+        "description": "retrato de personagem (quando existir upload) recebe duotone crimson/wine sutil com overlay escurecedor (Ref 5); molduras de canto ornamentadas funcionam como 'reveal-clip' visual delimitando a área de destaque sem recortar a imagem de verdade",
+        "technology": "CSS filter (grayscale + sepia/hue-rotate) + gradiente de opacidade sobreposto + SVG mask para vinheta",
+        "params": { "filter_pipeline": "grayscale(1) sepia(0.25) hue-rotate(-15deg) + gradiente escurecedor na metade onde há texto", "hover_transform": "nenhum ou scale(1.02) muito sutil só em retratos clicáveis (galeria pública)", "reveal_animation": "fade-in no mount (mantido, via PageTransition existente)", "distortion_type": "none" }
+      },
+      "glassmorphism_neumorphism": {
+        "enabled": false,
+        "style": "none",
+        "params": { "blur_radius": "n/a", "transparency": "n/a", "border_treatment": "n/a", "shadow_type": "n/a", "light_source_angle": "n/a" },
+        "_note": "explicitamente rejeitado — vidro fosco/neumorfismo pertence ao vocabulário 'SaaS contemporâneo' que o briefing original do Vermillion já proíbe ('nunca um painel SaaS genérico')"
+      },
+      "canvas_drawings": { "enabled": false, "type": "none", "description": "não adotado — ver nota em particle_systems sobre custo vs. benefício", "technology": "n/a", "params": { "draw_method": "n/a", "animation_loop": "n/a", "color_scheme": "n/a", "responsiveness": "n/a", "interaction": "n/a" } },
+      "svg_animations": {
+        "enabled": true,
+        "type": "path-draw",
+        "description": "traço revelado (stroke-dashoffset) para a moldura ornamentada de canto e para o WaxSeal, usado SÓ em 3 momentos de peso já existentes no produto: confirmação de aprovação (Conselho), publicação (Ficha Viva), e splash do Códice — nunca como entrada padrão de card ou lista",
+        "params": { "animation_method": "stroke-dashoffset de 100% a 0% num único `path`", "path_morphing": "não necessário", "stroke_animation": "revelação única no mount, 500-900ms, ease-out — desabilitada sob prefers-reduced-motion (mostra o traço completo direto)", "filter_effects": "nenhum" }
+      },
+      "composite_notes": "Resumo da fusão: das 5 referências, os dispositivos ADOTADOS são — (1) glow radial atmosférico no hero (Ref 2), (2) grão de filme finíssimo opcional em telas de tela cheia (Refs 2/3), (3) moldura ornamentada de canto com traço revelado (Refs 3/5), (4) letra-capitular em blocos de lore (Ref 5), (5) retrato em duotone com overlay escurecedor (Ref 5), (6) ritmo 'hero cinematográfico → bloco de leitura calmo' entre seções (Ref 4). Os dispositivos EXPLICITAMENTE REJEITADOS — chuva/partículas generativas (Ref 4, pesado demais e conflita com a proibição de parallax >1 camada), ticker-tape de faixa inteira (Ref 1, tom 'loja' incompatível com 'nunca SaaS genérico' mas também incompatível com o tom editorial-contido), blackletter como fonte de corpo (Ref 3, só Cinzel em insígnia continua valendo), textura de pedra/papel atrás de conteúdo (Ref 1, violaria a regra de contraste já medida). Todos os efeitos adotados são CSS/SVG puro, respeitam `prefers-reduced-motion`, e nenhum introduz cor nova — só profundidade, moldura e textura finíssima dentro da paleta já existente."
+    }
+  }
+}

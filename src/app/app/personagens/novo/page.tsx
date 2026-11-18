@@ -1,22 +1,22 @@
-import Link from "next/link";
 import { GothicShell } from "@/components/vermillion/gothic-shell";
-import { DemoBanner } from "@/components/vermillion/demo-banner";
 import { VelvetCard } from "@/components/vermillion/velvet-card";
 import { LoreDivider } from "@/components/vermillion/lore-divider";
-import { DEMO_CHARACTERS } from "@/lib/fixtures/demo-characters";
+import { SignOutButton } from "@/components/vermillion/auth/sign-out-button";
+import { listMyCharacters } from "@/lib/characters";
+import { startEmbraceAction } from "./actions";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/app" },
   { label: "Meu Grimório", href: "/app/personagens" },
 ];
 
-export default function NovoPersonagemPage() {
-  const remainingSlots = 3 - DEMO_CHARACTERS.length;
+export default async function NovoPersonagemPage() {
+  const characters = await listMyCharacters();
+  const remainingSlots = 3 - characters.length;
   const canStart = remainingSlots > 0;
 
   return (
-    <GothicShell navItems={NAV_ITEMS}>
-      <DemoBanner />
+    <GothicShell navItems={NAV_ITEMS} actions={<SignOutButton />}>
       <div className="mx-auto max-w-2xl px-6 py-16 text-center">
         <p className="font-badge text-xs uppercase tracking-[0.2em] text-ink-muted">
           Etapa 0 · Introdução
@@ -55,12 +55,14 @@ export default function NovoPersonagemPage() {
 
         <div className="mt-10">
           {canStart ? (
-            <Link
-              href="/app/personagens/demo-1/editar/1"
-              className="inline-flex items-center justify-center rounded-sm bg-primary px-6 py-3 font-badge text-xs uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/80"
-            >
-              Começar meu Abraço
-            </Link>
+            <form action={startEmbraceAction}>
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center rounded-sm bg-primary px-6 py-3 font-badge text-xs uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/80"
+              >
+                Começar meu Abraço
+              </button>
+            </form>
           ) : (
             <p className="text-sm text-accent-crimson-bright">
               Seus 3 slots já estão ocupados. Arquive um personagem para

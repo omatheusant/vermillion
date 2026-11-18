@@ -1,0 +1,58 @@
+{
+  "source": {
+    "file": "aesthetic-refernce.jpg",
+    "width": 736,
+    "height": 736
+  },
+  "measurement": {
+    "k": 8,
+    "sampling": {
+      "method": "deterministic_stratified",
+      "max_pixels": 160000,
+      "sampled_pixels": 160000
+    }
+  },
+  "palette": [
+    {
+      "hex": "#0e0d0d",
+      "coverage": 0.8484,
+      "role": "background"
+    },
+    {
+      "hex": "#841317",
+      "coverage": 0.0843,
+      "role": "accent"
+    },
+    {
+      "hex": "#4e1214",
+      "coverage": 0.0371,
+      "role": "unassigned"
+    },
+    {
+      "hex": "#d4b893",
+      "coverage": 0.0101,
+      "role": "text"
+    },
+    {
+      "hex": "#b9a080",
+      "coverage": 0.0083,
+      "role": "unassigned"
+    },
+    {
+      "hex": "#f2d6af",
+      "coverage": 0.0041,
+      "role": "unassigned"
+    },
+    {
+      "hex": "#5c4b3a",
+      "coverage": 0.0039,
+      "role": "unassigned"
+    },
+    {
+      "hex": "#8f7560",
+      "coverage": 0.0037,
+      "role": "unassigned"
+    }
+  ],
+  "measured": true
+}

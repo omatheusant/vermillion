@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s · Vermillion",
   },
   description:
-    "Vermillion é o arquivo digital de criaturas da noite: criação, progressão e publicação de personagens para uma crônica de Vampiro: A Máscara 5ª edição.",
+    "Vermillion é uma crônica de Vampiro: A Máscara (5ª edição) ambientada na Londres contemporânea de 2026, jogada por texto em um servidor de Discord. Este site é o arquivo digital da crônica: criação, progressão e publicação de personagens.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

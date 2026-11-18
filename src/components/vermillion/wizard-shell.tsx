@@ -1,7 +1,7 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState, type ReactNode } from "react";
+import { cn } from "cn";
 import { WizardStepper, type WizardStepInfo } from "@/components/vermillion/wizard-stepper";
 import { AutosaveIndicator, type AutosaveState } from "@/components/vermillion/autosave-indicator";
 
@@ -9,6 +9,12 @@ import { AutosaveIndicator, type AutosaveState } from "@/components/vermillion/a
  * Layout comum das etapas 1–9 do wizard O Abraço: 3 colunas em desktop
  * (etapas · formulário · prévia viva), stepper no topo + prévia em aba
  * no mobile (docs/UX_FLOW.md §3).
+ *
+ * `form` e `preview` são montados uma única vez cada (nunca duplicados
+ * no DOM): no mobile a visibilidade alterna por classe CSS conforme a
+ * aba ativa, e a partir de `lg` ambos ficam sempre visíveis. Duplicar o
+ * ReactNode em dois containers quebraria `id`/`htmlFor` (acessibilidade
+ * e `getByLabel` em testes) por gerar ids repetidos no documento.
  */
 export function WizardShell({
   steps,
@@ -27,6 +33,8 @@ export function WizardShell({
   preview: ReactNode;
   footer: ReactNode;
 }) {
+  const [mobileView, setMobileView] = useState<"form" | "preview">("form");
+
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
       <div className="mb-6 md:hidden">
@@ -44,22 +52,39 @@ export function WizardShell({
           </div>
 
           {/* Mobile: prévia vira aba ao lado do formulário */}
-          <div className="lg:hidden">
-            <Tabs defaultValue="form">
-              <TabsList className="mb-4">
-                <TabsTrigger value="form">Formulário</TabsTrigger>
-                <TabsTrigger value="preview">Prévia do dossiê</TabsTrigger>
-              </TabsList>
-              <TabsContent value="form">{form}</TabsContent>
-              <TabsContent value="preview">{preview}</TabsContent>
-            </Tabs>
+          <div className="mb-4 inline-flex gap-1 rounded-lg bg-muted p-[3px] lg:hidden" role="tablist">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mobileView === "form"}
+              onClick={() => setMobileView("form")}
+              className={cn(
+                "rounded-md px-3 py-1 text-sm font-medium transition-colors",
+                mobileView === "form" ? "bg-background text-foreground shadow-sm" : "text-foreground/60"
+              )}
+            >
+              Formulário
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mobileView === "preview"}
+              onClick={() => setMobileView("preview")}
+              className={cn(
+                "rounded-md px-3 py-1 text-sm font-medium transition-colors",
+                mobileView === "preview" ? "bg-background text-foreground shadow-sm" : "text-foreground/60"
+              )}
+            >
+              Prévia do dossiê
+            </button>
           </div>
-          <div className="hidden lg:block">{form}</div>
+
+          <div className={cn("lg:block", mobileView === "form" ? "block" : "hidden")}>{form}</div>
 
           <div className="mt-8">{footer}</div>
         </div>
 
-        <aside className="hidden lg:block">{preview}</aside>
+        <aside className={cn("lg:block", mobileView === "preview" ? "block" : "hidden")}>{preview}</aside>
       </div>
     </div>
   );

@@ -1,0 +1,58 @@
+{
+  "source": {
+    "file": "hero-reference.jpg",
+    "width": 735,
+    "height": 416
+  },
+  "measurement": {
+    "k": 8,
+    "sampling": {
+      "method": "deterministic_stratified",
+      "max_pixels": 160000,
+      "sampled_pixels": 160000
+    }
+  },
+  "palette": [
+    {
+      "hex": "#0f0c0a",
+      "coverage": 0.6058,
+      "role": "background"
+    },
+    {
+      "hex": "#261916",
+      "coverage": 0.2223,
+      "role": "unassigned"
+    },
+    {
+      "hex": "#472e2a",
+      "coverage": 0.0861,
+      "role": "unassigned"
+    },
+    {
+      "hex": "#745c56",
+      "coverage": 0.027,
+      "role": "unassigned"
+    },
+    {
+      "hex": "#b98b84",
+      "coverage": 0.019,
+      "role": "unassigned"
+    },
+    {
+      "hex": "#861e20",
+      "coverage": 0.0186,
+      "role": "unassigned"
+    },
+    {
+      "hex": "#c92c33",
+      "coverage": 0.0115,
+      "role": "accent"
+    },
+    {
+      "hex": "#e6c7c0",
+      "coverage": 0.0097,
+      "role": "text"
+    }
+  ],
+  "measured": true
+}

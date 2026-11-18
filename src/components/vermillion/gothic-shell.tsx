@@ -23,8 +23,8 @@ export function GothicShell({
 }) {
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <header className="border-b border-border/70">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/75 backdrop-blur-sm">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <Link href="/" className="transition-opacity hover:opacity-80">
             <VermillionWordmark size="sm" />
           </Link>
@@ -48,7 +48,7 @@ export function GothicShell({
         </div>
       </header>
 
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 pt-16">{children}</main>
 
       <footer className="border-t border-border/70">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-8 text-xs text-ink-muted">
