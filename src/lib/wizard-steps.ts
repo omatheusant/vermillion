@@ -25,3 +25,8 @@ export function getWizardSteps(pendingByStep: Partial<Record<number, number>> = 
     pendingCount: pendingByStep[index],
   }));
 }
+
+/** Rascunho/pendência de ajuste: reabre o wizard na última etapa preenchida, nunca sempre na 1. */
+export function resumeStep(creationStep: number): number {
+  return Math.max(1, Math.min(creationStep, 9));
+}

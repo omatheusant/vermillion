@@ -6,6 +6,8 @@ import { VelvetCard } from "@/components/vermillion/velvet-card";
 import { FormField, fieldInputClassName } from "@/components/vermillion/form-field";
 import { WizardStepFrame } from "@/components/vermillion/wizard-step-frame";
 import { saveLineageStepAction, type Sect } from "@/lib/wizard-actions";
+import { LoreTooltip } from "@/components/vermillion/lore-tooltip";
+import { SECT_COPY, SOURCE_DOCUMENT } from "@/lib/v5-copy";
 
 const SECTS: { value: Sect; label: string }[] = [
   { value: "camarilla", label: "Camarilla" },
@@ -97,7 +99,11 @@ export function WizardStepLineage({
           <ClanSelector clans={clans} value={lineage} onChange={handleLineageChange} />
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <FormField label="Seita (opcional)" htmlFor="sect">
+            <FormField
+              label="Seita (opcional)"
+              htmlFor="sect"
+              help={<LoreTooltip summary={SECT_COPY.summary} sourceDocument={SOURCE_DOCUMENT} sourcePage={SECT_COPY.sourcePage} />}
+            >
               <select
                 id="sect"
                 value={sect ?? ""}

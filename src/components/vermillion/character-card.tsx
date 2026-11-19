@@ -3,6 +3,7 @@ import { Progress } from "@/components/ui/progress";
 import { StatusBadge } from "@/components/vermillion/status-badge";
 import { VelvetCard } from "@/components/vermillion/velvet-card";
 import type { CharacterSummary } from "@/types/character";
+import { resumeStep } from "@/lib/wizard-steps";
 
 const LINEAGE_LABEL: Record<CharacterSummary["lineage"], string> = {
   clan: "",
@@ -14,8 +15,13 @@ export function CharacterCard({ character }: { character: CharacterSummary }) {
   const lineageLabel =
     character.lineage === "clan" ? character.clanName : LINEAGE_LABEL[character.lineage];
 
+  const isEditable = character.status === "draft" || character.status === "changes_requested";
+  const href = isEditable
+    ? `/app/personagens/${character.id}/editar/${resumeStep(character.creationStep)}`
+    : `/app/personagens/${character.id}`;
+
   return (
-    <Link href={`/app/personagens/${character.id}`} className="block">
+    <Link href={href} className="block">
       <VelvetCard
         className="hover-lift-glow h-full"
         cornerLabel={<StatusBadge status={character.status} />}
@@ -23,9 +29,14 @@ export function CharacterCard({ character }: { character: CharacterSummary }) {
         <div className="flex flex-col gap-4">
           <div
             aria-hidden="true"
-            className="flex h-28 items-center justify-center rounded-sm border border-border/60 bg-gradient-to-b from-surface-wine to-background font-display text-3xl text-ink-muted"
+            className="flex h-28 items-center justify-center overflow-hidden rounded-sm border border-border/60 bg-gradient-to-b from-surface-wine to-background font-display text-3xl text-ink-muted"
           >
-            {character.name.charAt(0)}
+            {character.portraitUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element -- URL assinada e efêmera, não compensa next/image
+              <img src={character.portraitUrl} alt="" className="size-full object-cover" />
+            ) : (
+              character.name.charAt(0)
+            )}
           </div>
 
           <div>

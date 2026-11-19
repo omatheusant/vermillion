@@ -25,5 +25,7 @@ export interface CharacterSummary {
   status: CharacterStatus;
   /** 0–100, só para a UI de progresso do roster. */
   completion: number;
+  /** Última etapa (1-9) do wizard já preenchida — usada para retomar edição em vez de sempre reabrir a etapa 1. */
+  creationStep: number;
   portraitUrl?: string;
 }

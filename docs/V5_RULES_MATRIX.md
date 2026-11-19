@@ -2,7 +2,7 @@
 
 `ruleset_version` deste documento: `v5-vermillion-2026.1`
 
-Este documento separa, para toda regra implementada, três coisas: (1) o que foi **verificado** contra uma página específica de `players_guide.pdf` (local, não versionado em git); (2) o que é **parâmetro de briefing** — um número ou regra fornecido pelo documento mestre do produto, consistente com a V5 padrão, mas não re-conferido contra uma página local porque o corebook não está disponível no projeto; (3) o que é **configuração editorial do Vermillion** — decisão de produto do projeto, não uma regra da V5.
+Este documento separa, para toda regra implementada, três coisas: (1) o que foi **verificado** contra uma página específica de `players_guide.pdf` ou (desde 19/11/2026) `V5_Corebook_Extended.pdf` — ambos locais, nenhum versionado em git; (2) o que é **parâmetro de briefing** — um número ou regra fornecido pelo documento mestre do produto, consistente com a V5 padrão, mas ainda não re-conferido contra uma página local; (3) o que é **configuração editorial do Vermillion** — decisão de produto do projeto, não uma regra da V5.
 
 Nenhuma entrada de poder, mérito ou defeito é inventada sem pelo menos uma dessas três classificações explícitas.
 
@@ -11,10 +11,9 @@ Nenhuma entrada de poder, mérito ou defeito é inventada sem pelo menos uma des
 | Arquivo | Descrição | Páginas consultadas nesta rodada |
 |---|---|---|
 | `players_guide.pdf` | Vampire: The Masquerade Players Guide (250 páginas, somente imagem — sem camada de texto, extraído via renderização) | Sumário (p. 3–5 do PDF), Clan Sheet (impressas 12–13), Vampire Traits and Types Summary Sheet (impressas 62–63), Discipline Powers → Animalism (impressa 69), Predator Types (impressa 106), New Merits and Flaws (impressa 118), Castoffs → Caitiff (impressa 125), Thin-Blood Alchemy Level 4–5 (impressas 105–106) |
+| `V5_Corebook_Extended.pdf` | Corebook V5 (430 páginas, com camada de texto pesquisável — `pymupdf`, sem necessidade de renderizar imagem). Cobre só os 7 clãs "core" (Brujah, Gangrel, Malkavian, Nosferatu, Toreador, Tremere, Ventrue) + Caitiff + Sangue-Ralo; os outros 7 clãs já cadastrados continuam sem capítulo próprio nesta fonte | Character Creation Summary (impressas 136–137), Core Traits — Atributos/Perícias/Força de Vontade (impressas 155–159), Beliefs — Convicções/Pilares/Ambição-Desejo (impressas 172–174), Advantages — Méritos/Antecedentes (impressas 179–194, incl. Thin-Blood Merits/Flaws 182–185) |
 
-Offset observado: página impressa N ≈ índice de PDF N+1 (há variação perto de divisórias de capítulo — sempre confirmar pelo rodapé da página renderizada, nunca assumir o offset cegamente).
-
-Não há corebook V5 disponível localmente. Regras de criação de personagem (distribuição de pontos de Atributos/Perícias/Disciplinas/Vantagens, fórmulas derivadas) vêm do corebook na V5 oficial e **não puderam ser re-verificadas contra uma página local** — são tratadas como parâmetro de briefing (seção 4).
+Offset observado em `players_guide.pdf`: página impressa N ≈ índice de PDF N+1 (há variação perto de divisórias de capítulo — sempre confirmar pelo rodapé da página renderizada, nunca assumir o offset cegamente). Em `V5_Corebook_Extended.pdf` o mesmo offset (índice de PDF = página impressa + 1) se confirmou estável em todo o material lido até agora.
 
 ## 2. Clãs — verificado (Clan Sheet, impressas 12–13)
 
@@ -61,6 +60,8 @@ Físicos: Força, Destreza, Vigor. Sociais: Carisma, Manipulação, Compostura. 
 
 Nomes em PT-BR acima são tradução de trabalho do Vermillion (projeto autoral); ajustar para os nomes oficiais em português se/quando uma fonte oficial em PT-BR for confirmada pelo narrador da crônica — registrar a fonte em `chronicle_overrides` se divergir.
 
+**Atualização 19/11/2026**: a definição de cada um dos 9 Atributos e das 27 Perícias (o que cada um mede, não só o nome) agora tem resumo autoral próprio com citação de página de `V5_Corebook_Extended.pdf` (impressas 155–159 para Atributos/Força de Vontade, 159–171 para Perícias) — vive em `src/lib/v5-copy.ts` (`ATTRIBUTE_COPY`/`SKILL_COPY`/`WILLPOWER_COPY`) e alimenta os tooltips "?" do wizard (etapas 3 e 4), não `reference_content` (é copy de UI, não catálogo editável pelo narrador — ADR 0005).
+
 ### Disciplinas (confirma a lista do documento mestre) e clãs associados
 
 Animalismo (Gangrel, Nosferatu, Ravnos, Tzimisce) · Auspícios/Auspex (Hecata, Malkavian, Toreador, Tremere, Salubri) · Feitiçaria de Sangue/Blood Sorcery (Banu Haqim, Tremere) · Celeridade (Banu Haqim, Brujah, Toreador) · Dominação/Dominate (Malkavian, Salubri, Tremere, Tzimisce, Ventrue, Lasombra) · Fortitude (Gangrel, Hecata, Salubri, Ventrue) · Ofuscação/Obfuscate (Malkavian, Nosferatu, Ravnos, Banu Haqim, Ministério) · Oblívio/Oblivion (Hecata, Lasombra) · Potência/Potence (Brujah, Lasombra, Nosferatu) · Presença/Presence (Brujah, Ministério, Ravnos, Toreador, Ventrue) · Metamorfose/Protean (Gangrel, Ministério, Tzimisce) · Alquimia de Sangue-Ralo/Thin-Blood Alchemy (exclusiva de Sangue-Ralo).
@@ -71,25 +72,27 @@ Nota: a tabela do Clan Sheet (seção 2) e esta lista por Disciplina (Summary Sh
 
 Allies, Contacts, Fame, Haven, Herd, Influence, Loresheet, Mask, Mawla, Resources, Retainers, Status. (Nomes em inglês na fonte; tradução PT-BR fica em `reference_content`.)
 
-## 4. Criação de personagem — parâmetro de briefing (não re-verificado localmente)
+## 4. Criação de personagem — verificado (`V5_Corebook_Extended.pdf`, "Character Creation Summary", impressas 136–137)
 
-Estes valores vêm do documento mestre do produto e são tratados como a configuração-padrão da crônica Vermillion. Ficam marcados `source_reference = "briefing_v5_corebook"` em vez de uma página local, porque o corebook não está disponível no projeto para nova conferência.
+**Atualização 19/11/2026**: estes valores eram tratados como parâmetro de briefing (não re-verificados) porque nenhum corebook estava disponível localmente. O resumo de criação de personagem do corebook (impressas 136–137) confirma, sem divergência, todos os números já implementados em `src/domain/v5/`:
 
 - **Atributos**: distribuição inicial 1×4, 3×3, 4×2, 1×1 entre os 9 atributos.
-- **Perícias** — três presets exclusivos (não somam entre si):
+- **Perícias** — três presets exclusivos (não somam entre si; a fonte os chama de "jack of all trades", "balanced", "specialist" — traduzidos no Vermillion como Generalista/Equilibrado/Especialista):
   - Generalista: 1×3, 8×2, 10×1.
   - Equilibrado: 3×3, 5×2, 7×1.
   - Especialista: 1×4, 3×3, 3×2, 3×1.
-- **Disciplinas** (clã comum): duas Disciplinas do clã (2 pontos + 1 ponto), terceira sem pontos na criação.
-- **Vantagens e Defeitos**: orçamento padrão 7 pontos de Vantagens, 2 pontos de Defeitos. Vantagens/Defeitos do Tipo de Predador não consomem esse orçamento.
+- **Disciplinas** (clã comum): duas Disciplinas do clã (2 pontos + 1 ponto), terceira sem pontos na criação. Caitiff: duas Disciplinas livres, mesma distribuição. Sangue-Ralo: sem Disciplina de clã (ver seção 6).
+- **Vantagens e Defeitos**: orçamento padrão 7 pontos de Vantagens, 2 pontos de Defeitos. Vantagens/Defeitos do Tipo de Predador não consomem esse orçamento. Sangue-Ralo: 1 a 3 Méritos de Sangue-Ralo + igual número de Defeitos de Sangue-Ralo, fora desse orçamento (ver seção 8.1).
 - **Humanidade** inicial: 7, salvo modificadores.
-- **Convicções**: 1 a 3, cada uma vinculada a 1 Pilar (Touchstone) mortal.
-- **Derivados**: Saúde = Vigor + 3; Força de Vontade = Compostura + Determinação.
-- **Fome**: escala 0–5; dados de Fome substituem (não somam a) dados comuns na parada.
+- **Convicções**: 1 a 3, cada uma vinculada a 1 Pilar (Touchstone) mortal — definição de cada termo agora também verificada (impressas 172–174, ver `src/lib/v5-copy.ts`).
+- **Derivados**: Saúde = Vigor + 3; Força de Vontade = Compostura + Determinação (confirmado também em "Core Traits", impressa 157).
+- **Fome**: escala 0–5; dados de Fome substituem (não somam a) dados comuns na parada. (Não estava no resumo de criação lido nesta rodada — continua parâmetro de briefing.)
 
 Essas regras são implementadas em `src/domain/v5/` como funções puras e cobertas por teste unitário (ver `docs/IMPLEMENTATION_PLAN.md`, Fase D). Qualquer divergência que a narração da crônica queira aplicar entra em `chronicle_overrides`, nunca sobrescrevendo a regra base silenciosamente — resolução determinística documentada no código.
 
-## 5. XP — parâmetro de briefing
+## 5. XP — verificado (`V5_Corebook_Extended.pdf`, "Trait Costs: Experience", impressa 137)
+
+**Atualização 19/11/2026**: a tabela abaixo (já implementada em `src/domain/v5/calculate-xp-cost.ts`) é confirmada sem divergência pela fonte; as duas últimas linhas existem na fonte mas não têm implementação própria ainda (Feitiçaria de Sangue/Alquimia de Sangue-Ralo não compram rituais/fórmulas por XP no MVP) — ficam registradas aqui para quando essa frente for aberta, não bloqueiam nada hoje.
 
 | Compra | Custo |
 |---|---|
@@ -100,6 +103,9 @@ Essas regras são implementadas em `src/domain/v5/` como funções puras e cober
 | Disciplina fora do clã | novo nível × 7 |
 | Disciplina (Caitiff) | novo nível × 6 |
 | Potência de Sangue | novo nível × 10 |
+| Vantagem | 3 XP por ponto (não implementado — compra de Vantagem pós-criação fica para fase futura) |
+| Ritual de Feitiçaria de Sangue | nível do ritual × 3 (não implementado) |
+| Fórmula de Sangue-Ralo | nível da fórmula × 3 (não implementado) |
 
 Toda compra de XP é lançada em `xp_ledger` e sujeita a aprovação do narrador (nunca subtraída apenas no client) — ver ADR 0007.
 
@@ -112,15 +118,20 @@ Toda compra de XP é lançada em `xp_ledger` e sujeita a aprovação do narrador
 
 16 tipos confirmados, cada um com 2 Disciplinas associadas (ex.: Alleycat → Celeridade ou Potência; Sandman → Auspícios ou Ofuscação). Lista completa já extraída para seed; mecânica de bônus (Vantagem/Defeito automático, modificador de Fome) não foi lida em detalhe — **tratar como adiável para depois do MVP conforme o documento mestre** ("Tipos de Predador podem ser adiados para quem ainda não estabeleceu hábito de caça; não aplicar bônus indevidos"). No MVP, o Vermillion registra o Tipo de Predador escolhido como dado narrativo/Disciplinas sugeridas, sem aplicar automaticamente vantagens/defeitos mecânicos até esse texto ser verificado.
 
-## 8. Méritos e Defeitos — amostra verificada (impressa 118)
+## 8. Méritos, Defeitos e Antecedentes — verificado (`V5_Corebook_Extended.pdf`, capítulo "Advantages", impressas 179–194)
 
-Exemplos confirmados com custo em pontos (símbolo "•" = 1 ponto na fonte): Famous Face •, Ingénue •, Remarkable Feature • (Looks Merits), Vessel Recognition • (Feeding Merit), City Secrets • (Background-like merit). O texto da fonte remete ao corebook (p. 179 da V5) para a lista completa — confirma que o grosso do catálogo de Méritos/Defeitos-base está fora do material local disponível. Caitiff/Thin-Blood/Ghoul têm seções próprias nas páginas 126, 134 e 141 (citadas pela fonte, não lidas em detalhe ainda).
+**Atualização 19/11/2026**: `players_guide.pdf` só tinha uma amostra (impressa 118: Famous Face •, Ingénue •, Remarkable Feature •, Vessel Recognition •, City Secrets •) e remetia ao corebook para a lista completa. Essa lista completa agora está disponível — catálogo geral de Méritos/Defeitos (Linguagem, Visual, Uso de Substâncias, Arcaico, Vínculo de Sangue, Alimentação, Amaldiçoado) e de Antecedentes (Aliados, Contatos, Fama, Influência, Refúgio + sub-méritos, Rebanho, Identidade Falsa, Mawla, Recursos, Lacaios, Status) seedado em `supabase/migrations/20261119100001_seed_core_advantages.sql`, cada linha com `source_page` próprio. As 12 entradas específicas de Caitiff seedadas na Fase D (`20261116130001`, impressas 126–128 do `players_guide.pdf`) continuam valendo — são de uma linhagem que o corebook core não cobre em detalhe.
+
+### 8.1 Méritos e Defeitos de Sangue-Ralo — verificado (impressas 182–185)
+
+Sem custo em pontos na fonte (`dots_min=dots_max=0` no catálogo): cada Defeito de Sangue-Ralo "paga" um Mérito de Sangue-Ralo, e vice-versa — não consomem o orçamento de 7/2 pontos da criação comum (seção 4). `validateAdvantages` (domínio) foi ajustada para aceitar 0 pontos nesse caso.
 
 ## 9. Pendências de leitura (não bloqueiam o MVP, registradas para não esquecer)
 
 - ~~Caitiff Merits/Flaws (p. 126–127)~~ — lido na Fase D, seedado (seção 10).
-- Thin-Blood Merits/Flaws (~p. 134) e Blood Destiny (~p. 132).
-- Ghoul Advantages (~p. 141).
+- ~~Thin-Blood Merits/Flaws~~ — lido em `V5_Corebook_Extended.pdf` (impressas 182–185) e seedado (seção 8.1).
+- Blood Destiny (~p. 132 do `players_guide.pdf`) — ainda não lido.
+- Ghoul Advantages (~p. 141 do `players_guide.pdf`) — ainda não lido.
 - ~~Oblivion Ceremonies (p. 96–97)~~ — lido na Fase D (Level 4–5), seedado.
 - Blood Sorcery Rituals (p. 99) — catálogo de Feitiçaria de Sangue ainda incompleto (só Level 1–2 por nome, via fichas prontas; texto mecânico não lido).
 

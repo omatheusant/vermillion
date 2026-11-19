@@ -4,11 +4,13 @@ import { useMemo, useState } from "react";
 import { Plus, X } from "lucide-react";
 import { VelvetCard } from "@/components/vermillion/velvet-card";
 import { DotsInput } from "@/components/vermillion/dots-input";
+import { LoreTooltip } from "@/components/vermillion/lore-tooltip";
 import { Button } from "@/components/ui/button";
 import { WizardStepFrame } from "@/components/vermillion/wizard-step-frame";
 import { saveSkillsStepAction } from "@/lib/wizard-actions";
 import { SKILL_IDS, validateSkills, type SkillId, type SkillPreset } from "@/domain/v5";
 import { SKILL_LABELS } from "@/lib/v5-labels";
+import { SKILL_COPY, SOURCE_DOCUMENT } from "@/lib/v5-copy";
 
 const CATEGORY_SKILLS = {
   physical: SKILL_IDS.slice(0, 9),
@@ -17,9 +19,9 @@ const CATEGORY_SKILLS = {
 } as const;
 
 const PRESETS: { value: SkillPreset; label: string; description: string }[] = [
-  { value: "generalist", label: "Generalista", description: "1×3, 8×2, 10×1" },
-  { value: "balanced", label: "Equilibrado", description: "3×3, 5×2, 7×1" },
-  { value: "specialist", label: "Especialista", description: "1×4, 3×3, 3×2, 3×1" },
+  { value: "generalist", label: "Generalista", description: "1 perícia com 3 pontos, 8 com 2, 10 com 1 — conhecimento espalhado, nada muito fraco." },
+  { value: "balanced", label: "Equilibrado", description: "3 perícias com 3 pontos, 5 com 2, 7 com 1 — meio-termo entre foco e variedade." },
+  { value: "specialist", label: "Especialista", description: "1 perícia com 4 pontos, 3 com 3, 3 com 2, 3 com 1 — poucas perícias, mas no limite." },
 ];
 
 export interface SpecializationDraft {
@@ -62,7 +64,11 @@ export function WizardStepSkills({
       form={
         <div>
           <h1 className="font-display text-2xl text-foreground">Perícias e especializações</h1>
-          <p className="mt-1 text-sm text-ink-muted">Escolha um preset — eles não se somam entre si.</p>
+          <p className="mt-1 text-sm text-ink-muted">
+            Escolha <strong className="text-foreground">um</strong> dos 3 presets abaixo como ponto de partida da
+            distribuição. Trocar de preset reseta todas as perícias para 0 e recomeça do zero — eles não se somam
+            entre si, e você não pode misturar dois.
+          </p>
 
           <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
             {PRESETS.map((p) => (
@@ -91,6 +97,13 @@ export function WizardStepSkills({
                     <DotsInput
                       key={skillId}
                       label={SKILL_LABELS[skillId]}
+                      labelAddon={
+                        <LoreTooltip
+                          summary={SKILL_COPY[skillId].summary}
+                          sourceDocument={SOURCE_DOCUMENT}
+                          sourcePage={SKILL_COPY[skillId].sourcePage}
+                        />
+                      }
                       value={values[skillId]}
                       min={0}
                       max={preset === "specialist" ? 4 : 3}
@@ -104,7 +117,11 @@ export function WizardStepSkills({
 
           <div className="mt-6">
             <h2 className="font-badge text-xs uppercase tracking-[0.12em] text-ink-muted">Especializações</h2>
-            <p className="mt-1 text-xs text-ink-muted">Pelo menos uma especialização é gratuita na criação.</p>
+            <p className="mt-1 text-xs text-ink-muted">
+              Uma especialização é um foco dentro de uma perícia (ex.: Luta Armada — Facas) que soma 1 dado extra
+              quando ele se aplica ao teste. A primeira especialização que você adicionar aqui é gratuita; qualquer
+              outra, além dela, custa pontos de experiência depois da criação.
+            </p>
             <div className="mt-3 space-y-2">
               {specializations.map((spec, index) => (
                 <div key={index} className="flex items-center gap-2">

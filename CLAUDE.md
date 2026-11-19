@@ -4,7 +4,7 @@ Especificação completa: `VERMILLION_PROMPT_CLAUDE_CODE.md`. Planejamento: `doc
 
 ## Regras inegociáveis
 
-- **Não inventar regras de V5.** Toda regra/poder/mérito tem `source_document` + `source_page`, ou status `requires_reference` (ADR 0001). O corebook não está disponível localmente — só `players_guide.pdf` (raiz, **nunca versionado em git**).
+- **Não inventar regras de V5.** Toda regra/poder/mérito tem `source_document` + `source_page`, ou status `requires_reference` (ADR 0001). Fontes locais disponíveis (raiz do projeto, **nenhuma versionada em git**): `players_guide.pdf` e, desde 19/11/2026, `V5_Corebook_Extended.pdf` (corebook V5 com camada de texto pesquisável — cobre só os 7 clãs "core" + Caitiff + Sangue-Ralo; os outros 7 clãs cadastrados continuam sem corebook próprio).
 - **Idioma**: UI e rótulos em PT-BR. Código (funções, variáveis, schemas, arquivos) em inglês.
 - **Sem Prisma/Drizzle** (ADR 0010): migrations SQL + tipos gerados pelo Supabase CLI.
 - **Sem contagem de slots só no client** (ADR 0002): a trava de 3 personagens ativos por usuário+crônica vive no banco (`slot_number` + índice parcial + advisory lock).

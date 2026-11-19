@@ -65,6 +65,15 @@ export function PublicGalleryGrid({ characters }: { characters: PublicCharacterC
           {filtered.map((character) => (
             <Link key={character.id} href={`/personagens/${character.slug}`} className="block">
               <VelvetCard className="hover-lift-glow h-full">
+                {character.portraitUrl ? (
+                  <div
+                    aria-hidden="true"
+                    className="mb-4 aspect-[3/4] w-full overflow-hidden rounded-sm border border-border/60"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element -- URL assinada e efêmera, não compensa next/image */}
+                    <img src={character.portraitUrl} alt="" className="size-full object-cover" />
+                  </div>
+                ) : null}
                 <h3 className="font-display text-xl text-foreground">{character.name}</h3>
                 <p className="mt-0.5 font-badge text-[0.65rem] uppercase tracking-[0.1em] text-ink-muted">
                   {character.lineage === "clan" ? character.clanName : LINEAGE_LABELS[character.lineage]}

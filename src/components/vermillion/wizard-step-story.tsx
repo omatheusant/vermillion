@@ -4,6 +4,7 @@ import { useState } from "react";
 import { VelvetCard } from "@/components/vermillion/velvet-card";
 import { FormField, fieldInputClassName } from "@/components/vermillion/form-field";
 import { WizardStepFrame } from "@/components/vermillion/wizard-step-frame";
+import { CharacterPortraitUploader } from "@/components/vermillion/character-portrait-uploader";
 import { saveStoryStepAction } from "@/lib/wizard-actions";
 
 export interface StoryInitial {
@@ -24,10 +25,12 @@ export function WizardStepStory({
   characterId,
   initialVersion,
   initial,
+  initialPortraitUrl,
 }: {
   characterId: string;
   initialVersion: number;
   initial: StoryInitial;
+  initialPortraitUrl: string | null;
 }) {
   const [version, setVersion] = useState(initialVersion);
   const [values, setValues] = useState(initial);
@@ -51,7 +54,15 @@ export function WizardStepStory({
 
           <div>
             <h2 className="font-badge text-xs uppercase tracking-[0.1em] text-ink-muted">Públicos</h2>
-            <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="mt-3">
+              <CharacterPortraitUploader
+                characterId={characterId}
+                version={version}
+                onVersionChange={setVersion}
+                currentUrl={initialPortraitUrl}
+              />
+            </div>
+            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <FormField label="Aparência" htmlFor="appearance">
                 <textarea
                   id="appearance"

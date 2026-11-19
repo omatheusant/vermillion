@@ -6,6 +6,7 @@ import { LoreTooltip } from "@/components/vermillion/lore-tooltip";
 import { FormField, fieldInputClassName } from "@/components/vermillion/form-field";
 import { WizardStepFrame } from "@/components/vermillion/wizard-step-frame";
 import { saveIdentityStepAction } from "@/lib/wizard-actions";
+import { AMBITION_COPY, DESIRE_COPY, SOURCE_DOCUMENT } from "@/lib/v5-copy";
 
 export interface IdentityInitial {
   name: string;
@@ -106,7 +107,11 @@ export function WizardStepIdentity({
           </div>
 
           <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <FormField label="Ambição" htmlFor="ambition">
+            <FormField
+              label="Ambição"
+              htmlFor="ambition"
+              help={<LoreTooltip summary={AMBITION_COPY.summary} sourceDocument={SOURCE_DOCUMENT} sourcePage={AMBITION_COPY.sourcePage} />}
+            >
               <textarea
                 id="ambition"
                 value={values.ambition}
@@ -115,7 +120,11 @@ export function WizardStepIdentity({
                 className={`${fieldInputClassName} resize-none`}
               />
             </FormField>
-            <FormField label="Desejo" htmlFor="desire">
+            <FormField
+              label="Desejo"
+              htmlFor="desire"
+              help={<LoreTooltip summary={DESIRE_COPY.summary} sourceDocument={SOURCE_DOCUMENT} sourcePage={DESIRE_COPY.sourcePage} />}
+            >
               <textarea
                 id="desire"
                 value={values.desire}

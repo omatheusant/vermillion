@@ -1,4 +1,5 @@
 import { SKILL_IDS, type SkillDots, type SkillPreset, type ValidationIssue } from "./types";
+import { SKILL_LABELS } from "@/lib/v5-labels";
 
 /**
  * Presets de Perícia — docs/V5_RULES_MATRIX.md §4. Exclusivos, não
@@ -36,7 +37,7 @@ export function validateSkills(preset: SkillPreset, dots: SkillDots[]): Validati
       continue;
     }
     if (seen.has(dot.skillId)) {
-      issues.push({ step: 4, field: dot.skillId, message: `Perícia duplicada: ${dot.skillId}.` });
+      issues.push({ step: 4, field: dot.skillId, message: `Perícia duplicada: ${SKILL_LABELS[dot.skillId as keyof typeof SKILL_LABELS] ?? dot.skillId}.` });
     }
     seen.add(dot.skillId);
 

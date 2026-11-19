@@ -25,6 +25,7 @@ import {
 import type { LineageChoice } from "@/components/vermillion/clan-selector";
 import type { Sect } from "@/lib/wizard-actions";
 import { ATTRIBUTE_IDS, SKILL_IDS, DISCIPLINE_IDS, type AttributeId, type SkillId, type DisciplineId } from "@/domain/v5";
+import { getCharacterPortraitSignedUrl } from "@/lib/portrait";
 
 const NAV_ITEMS = [{ label: "Meu Grimório", href: "/app/personagens" }];
 
@@ -177,10 +178,12 @@ export default async function EditarPersonagemPage({
       />
     );
   } else if (step === 8) {
+    const portraitUrl = await getCharacterPortraitSignedUrl(supabase, id);
     stepContent = (
       <WizardStepStory
         characterId={id}
         initialVersion={character.version}
+        initialPortraitUrl={portraitUrl}
         initial={{
           appearance: details?.appearance ?? "",
           personality: details?.personality ?? "",

@@ -20,6 +20,16 @@ describe("validateAdvantages", () => {
     expect(issues.some((i) => i.field === "flaws")).toBe(true);
   });
 
+  it("aceita 0 pontos (Mérito/Defeito de Sangue-Ralo, sem custo em pontos)", () => {
+    const issues = validateAdvantages([{ dots: 0, source: "base_budget" }], [{ dots: 0, source: "base_budget" }]);
+    expect(issues).toEqual([]);
+  });
+
+  it("rejeita pontuação negativa", () => {
+    const issues = validateAdvantages([{ dots: -1, source: "base_budget" }], []);
+    expect(issues.some((i) => i.field === "advantages")).toBe(true);
+  });
+
   it("Vantagens de Tipo de Predador não consomem o orçamento base", () => {
     const issues = validateAdvantages(
       [

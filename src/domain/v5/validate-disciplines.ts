@@ -1,4 +1,5 @@
 import type { CharacterLineage, DisciplineId, DisciplinePick, ValidationIssue } from "./types";
+import { DISCIPLINE_LABELS } from "@/lib/v5-labels";
 
 /**
  * Disciplinas na criação — docs/V5_RULES_MATRIX.md §4 + master doc
@@ -64,7 +65,7 @@ export function validateDisciplines(
         issues.push({
           step: 5,
           field: pick.disciplineId,
-          message: `${pick.disciplineId} não é uma Disciplina do clã escolhido.`,
+          message: `${DISCIPLINE_LABELS[pick.disciplineId] ?? pick.disciplineId} não é uma Disciplina do clã escolhido.`,
         });
       }
     }

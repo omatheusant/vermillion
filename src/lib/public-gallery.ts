@@ -1,6 +1,7 @@
 import "server-only";
 import { createClient } from "@/lib/supabase/server";
 import { evaluateVisibility, PUBLIC_DETAIL_FIELDS } from "@/domain/v5";
+import { getCharacterPortraitSignedUrls, getCharacterPortraitSignedUrl } from "@/lib/portrait";
 
 export interface PublicCharacterCard {
   id: string;
@@ -12,6 +13,7 @@ export interface PublicCharacterCard {
   concept: string | null;
   apparentAge: number | null;
   ownerUsername: string | null;
+  portraitUrl: string | null;
 }
 
 /**
@@ -41,6 +43,10 @@ export async function getPublicGallery(): Promise<PublicCharacterCard[]> {
 
   const clanNameById = new Map((clans ?? []).map((c) => [c.id, c.name]));
   const usernameById = new Map((owners ?? []).map((o) => [o.id, o.username]));
+  const portraitByCharacterId = await getCharacterPortraitSignedUrls(
+    supabase,
+    characters.map((c) => c.id),
+  );
 
   return characters.map((character) => {
     const visibility = evaluateVisibility("public", { visibility: character.visibility, status: character.status });
@@ -61,6 +67,7 @@ export async function getPublicGallery(): Promise<PublicCharacterCard[]> {
       concept: (safe.concept as string | null) ?? null,
       apparentAge: (safe.apparent_age as number | null) ?? null,
       ownerUsername: character.owner_id ? (usernameById.get(character.owner_id) ?? null) : null,
+      portraitUrl: portraitByCharacterId.get(character.id) ?? null,
     };
   });
 }
@@ -103,14 +110,15 @@ export async function getPublicCharacterBySlug(slug: string) {
   const visibility = evaluateVisibility("public", { visibility: character.visibility, status: character.status });
   if (!visibility.canViewCharacter) return null;
 
-  const [{ data: clan }, { data: owner }] = await Promise.all([
+  const [{ data: clan }, { data: owner }, portraitUrl] = await Promise.all([
     character.clan_id
       ? supabase.from("reference_clans").select("name, disciplines, bane_summary").eq("id", character.clan_id).maybeSingle()
       : Promise.resolve({ data: null }),
     character.owner_id
       ? supabase.from("public_profiles").select("username, display_name").eq("id", character.owner_id).maybeSingle()
       : Promise.resolve({ data: null }),
+    getCharacterPortraitSignedUrl(supabase, character.id),
   ]);
 
-  return { character, clan, owner };
+  return { character, clan, owner, portraitUrl };
 }

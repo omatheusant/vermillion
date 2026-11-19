@@ -25,3 +25,11 @@ O wizard de criação (etapa 5) só permite que o **jogador** selecione poderes 
 
 - **Reproduzir de memória os poderes de nível 1 do corebook**: rejeitado — viola a exigência explícita de não inventar regras não verificáveis localmente.
 - **Bloquear a etapa 5 inteira até ter o corebook**: rejeitado — trava o MVP indefinidamente por uma dependência externa.
+
+## Atualização (2026-11-19) — corebook disponibilizado
+
+O Matheus adicionou `V5_Corebook_Extended.pdf` (430 páginas, com camada de texto pesquisável) ao projeto — igual ao `players_guide.pdf`, nunca versionado em git (`.gitignore`). Isso é exatamente o evento previsto em "Consequências": a decisão original (campo `verification_status` com dois valores) continua valendo sem mudança — só entradas migram de status quando alguém de fato lê a página correspondente e escreve o resumo autoral.
+
+Nesta rodada (Fase G — UX de criação v2), o corebook foi usado para verificar e seedar o catálogo completo de Vantagens/Defeitos/Antecedentes (`docs/V5_RULES_MATRIX.md` §8) e os textos de Atributos/Perícias/Convicções/Pilares usados nos tooltips do wizard (`docs/V5_RULES_MATRIX.md` §3–4). **Os poderes de Disciplina nível 1 — o problema original desta ADR — não foram revisitados nesta rodada** (não fazia parte do pedido); o catálogo de poderes continua com `requires_reference` para a maioria das entradas de nível 1, exatamente como antes. Abrir essa frente é candidata natural para uma fase futura, agora que a fonte existe.
+
+Importante: o corebook cobre só os 7 clãs "core" da V5 (Brujah, Gangrel, Malkavian, Nosferatu, Toreador, Tremere, Ventrue) + Caitiff + Sangue-Ralo. Os outros 7 clãs já cadastrados em `reference_clans` (Banu Haqim, Hecata, Lasombra, Ministério, Ravnos, Tzimisce, Salubri) continuam sem fonte local para seus poderes de Disciplina — essa lacuna não foi resolvida por este arquivo.

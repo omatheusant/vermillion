@@ -47,6 +47,7 @@ Thumbs.db
 
 # Material de referência licenciado — nunca versionar
 players_guide.pdf
+V5_Corebook_Extended.pdf
 docs/referencias/**/*.pdf
 
 # TypeScript

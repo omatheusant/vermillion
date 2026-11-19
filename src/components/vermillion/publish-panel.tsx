@@ -1,10 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useState, useTransition } from "react";
 import { VelvetCard } from "@/components/vermillion/velvet-card";
 import { WaxSeal } from "@/components/vermillion/wax-seal";
 import { Button } from "@/components/ui/button";
+import { resumeStep } from "@/lib/wizard-steps";
 import {
   Dialog,
   DialogClose,
@@ -24,12 +26,14 @@ export function PublishPanel({
   visibility,
   slug,
   publicShareToken,
+  creationStep,
 }: {
   characterId: string;
   status: string;
   visibility: string;
   slug: string | null;
   publicShareToken: string | null;
+  creationStep: number;
 }) {
   const router = useRouter();
   const [error, setError] = useState<string>();
@@ -97,9 +101,14 @@ export function PublishPanel({
 
       <div className="mt-3 flex flex-col gap-2">
         {status === "draft" || status === "changes_requested" ? (
-          <Button type="button" disabled={isPending} onClick={handleSubmit}>
-            Enviar para aprovação
-          </Button>
+          <>
+            <Button type="button" variant="outline" asChild>
+              <Link href={`/app/personagens/${characterId}/editar/${resumeStep(creationStep)}`}>Continuar edição</Link>
+            </Button>
+            <Button type="button" disabled={isPending} onClick={handleSubmit}>
+              Enviar para aprovação
+            </Button>
+          </>
         ) : null}
 
         {status === "approved" ? (

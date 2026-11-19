@@ -219,6 +219,7 @@ export type Database = {
           nationality: string | null;
           occupation: string | null;
           personality: string | null;
+          portrait_media_id: string | null;
           possessions: string | null;
           private_notes: string | null;
           real_age: number | null;
@@ -244,6 +245,7 @@ export type Database = {
           nationality?: string | null;
           occupation?: string | null;
           personality?: string | null;
+          portrait_media_id?: string | null;
           possessions?: string | null;
           private_notes?: string | null;
           real_age?: number | null;
@@ -268,6 +270,7 @@ export type Database = {
           nationality?: string | null;
           occupation?: string | null;
           personality?: string | null;
+          portrait_media_id?: string | null;
           possessions?: string | null;
           private_notes?: string | null;
           real_age?: number | null;
@@ -290,6 +293,13 @@ export type Database = {
             columns: ["character_id"];
             isOneToOne: true;
             referencedRelation: "public_characters";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "character_details_portrait_media_id_fkey";
+            columns: ["portrait_media_id"];
+            isOneToOne: false;
+            referencedRelation: "media_assets";
             referencedColumns: ["id"];
           },
         ];
@@ -1858,6 +1868,40 @@ export type Database = {
           p_lineage: Database["public"]["Enums"]["character_lineage"];
           p_sect?: Database["public"]["Enums"]["character_sect"];
           p_sire_name?: string;
+        };
+        Returns: {
+          chronicle_id: string;
+          clan_id: string | null;
+          created_at: string;
+          creation_step: number;
+          id: string;
+          lineage: Database["public"]["Enums"]["character_lineage"];
+          name: string;
+          owner_id: string;
+          public_share_token: string | null;
+          ruleset_version: string;
+          sect: Database["public"]["Enums"]["character_sect"] | null;
+          skill_preset: string | null;
+          slot_number: number | null;
+          slug: string | null;
+          status: Database["public"]["Enums"]["character_status"];
+          updated_at: string;
+          version: number;
+          visibility: Database["public"]["Enums"]["character_visibility"];
+        };
+        SetofOptions: {
+          from: "*";
+          to: "characters";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
+      save_character_portrait: {
+        Args: {
+          p_character_id: string;
+          p_expected_version: number;
+          p_mime_type: string;
+          p_storage_path: string;
         };
         Returns: {
           chronicle_id: string;

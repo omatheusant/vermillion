@@ -5,9 +5,11 @@ import { Plus, X } from "lucide-react";
 import { VelvetCard } from "@/components/vermillion/velvet-card";
 import { Button } from "@/components/ui/button";
 import { FormField, fieldInputClassName } from "@/components/vermillion/form-field";
+import { LoreTooltip } from "@/components/vermillion/lore-tooltip";
 import { WizardStepFrame } from "@/components/vermillion/wizard-step-frame";
 import { saveHumanityStepAction } from "@/lib/wizard-actions";
 import { validateConvictions, DEFAULT_HUMANITY } from "@/domain/v5";
+import { CONVICTION_COPY, TOUCHSTONE_COPY, TOUCHSTONE_BOND_COPY, SOURCE_DOCUMENT } from "@/lib/v5-copy";
 
 export interface ConvictionDraft {
   clientId: string;
@@ -79,7 +81,11 @@ export function WizardStepHumanity({
               return (
                 <VelvetCard key={conviction.clientId}>
                   <div className="flex items-start justify-between gap-2">
-                    <FormField label={`Convicção ${index + 1}`} htmlFor={`conviction-${conviction.clientId}`}>
+                    <FormField
+                      label={`Convicção ${index + 1}`}
+                      htmlFor={`conviction-${conviction.clientId}`}
+                      help={<LoreTooltip summary={CONVICTION_COPY.summary} sourceDocument={SOURCE_DOCUMENT} sourcePage={CONVICTION_COPY.sourcePage} />}
+                    >
                       <input
                         id={`conviction-${conviction.clientId}`}
                         value={conviction.label}
@@ -103,7 +109,11 @@ export function WizardStepHumanity({
 
                   {touchstone ? (
                     <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      <FormField label="Pilar (nome)" htmlFor={`touchstone-name-${conviction.clientId}`}>
+                      <FormField
+                        label="Pilar (nome)"
+                        htmlFor={`touchstone-name-${conviction.clientId}`}
+                        help={<LoreTooltip summary={TOUCHSTONE_COPY.summary} sourceDocument={SOURCE_DOCUMENT} sourcePage={TOUCHSTONE_COPY.sourcePage} />}
+                      >
                         <input
                           id={`touchstone-name-${conviction.clientId}`}
                           value={touchstone.name}
@@ -117,7 +127,11 @@ export function WizardStepHumanity({
                           className={fieldInputClassName}
                         />
                       </FormField>
-                      <FormField label="Vínculo" htmlFor={`touchstone-bond-${conviction.clientId}`}>
+                      <FormField
+                        label="Vínculo"
+                        htmlFor={`touchstone-bond-${conviction.clientId}`}
+                        help={<LoreTooltip summary={TOUCHSTONE_BOND_COPY.summary} sourceDocument={SOURCE_DOCUMENT} sourcePage={TOUCHSTONE_BOND_COPY.sourcePage} />}
+                      >
                         <input
                           id={`touchstone-bond-${conviction.clientId}`}
                           value={touchstone.bond}

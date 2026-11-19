@@ -14,6 +14,7 @@ import {
   getCharacterAdvantages,
   getCharacterHumanity,
 } from "@/lib/wizard";
+import { getCharacterPortraitSignedUrl } from "@/lib/portrait";
 
 const NAV_ITEMS = [{ label: "Meu Grimório", href: "/app/personagens" }];
 
@@ -30,7 +31,7 @@ export default async function FichaVivaPage({
 
   const isOwner = character.owner_id === user.id;
 
-  const [details, attributes, { skills, specializations }, disciplines, { merits, flaws }, { convictions, touchstones, tracks }, xpEntries, clan] =
+  const [details, attributes, { skills, specializations }, disciplines, { merits, flaws }, { convictions, touchstones, tracks }, xpEntries, clan, portraitUrl] =
     await Promise.all([
       getCharacterDetails(supabase, id),
       getCharacterAttributes(supabase, id),
@@ -42,6 +43,7 @@ export default async function FichaVivaPage({
       character.clan_id
         ? supabase.from("reference_clans").select("name").eq("id", character.clan_id).maybeSingle().then((r) => r.data?.name ?? null)
         : Promise.resolve(null),
+      getCharacterPortraitSignedUrl(supabase, id),
     ]);
 
   const sheet = (
@@ -49,6 +51,7 @@ export default async function FichaVivaPage({
       data={{
         character,
         clanName: clan,
+        portraitUrl,
         details,
         attributes,
         skills,
@@ -82,7 +85,14 @@ export default async function FichaVivaPage({
 
           {isOwner ? (
             <div className="space-y-6">
-              <PublishPanel characterId={character.id} status={character.status} visibility={character.visibility} slug={character.slug} publicShareToken={character.public_share_token} />
+              <PublishPanel
+                characterId={character.id}
+                status={character.status}
+                visibility={character.visibility}
+                slug={character.slug}
+                publicShareToken={character.public_share_token}
+                creationStep={character.creation_step}
+              />
             </div>
           ) : null}
         </div>

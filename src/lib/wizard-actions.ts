@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { requireUser } from "@/lib/characters";
 import { getSubmissionIssues } from "@/lib/wizard";
+import { mapRpcError } from "@/lib/rpc-error";
 import {
   validateAttributes,
   validateSkills,
@@ -23,16 +24,6 @@ import {
 export interface StepActionState {
   error?: string;
   version?: number;
-}
-
-function mapRpcError(error: { code?: string; message: string }): string {
-  if (error.code === "P0003") {
-    return "Esta etapa foi salva em outro lugar enquanto você editava. Recarregue a página antes de continuar.";
-  }
-  if (error.code === "42501") {
-    return "Você não tem permissão para editar este personagem.";
-  }
-  return error.message || "Não foi possível salvar. Tente novamente.";
 }
 
 export async function saveIdentityStepAction(

@@ -4,9 +4,11 @@ import { useMemo, useState } from "react";
 import { Plus, X } from "lucide-react";
 import { VelvetCard } from "@/components/vermillion/velvet-card";
 import { Button } from "@/components/ui/button";
+import { LoreTooltip } from "@/components/vermillion/lore-tooltip";
 import { WizardStepFrame } from "@/components/vermillion/wizard-step-frame";
 import { saveAdvantagesStepAction } from "@/lib/wizard-actions";
 import { validateAdvantages, MERIT_BUDGET, FLAW_BUDGET } from "@/domain/v5";
+import { ADVANTAGES_BUDGET_COPY, SOURCE_DOCUMENT } from "@/lib/v5-copy";
 
 export interface AdvantageCatalogItem {
   id: string;
@@ -134,8 +136,13 @@ export function WizardStepAdvantages({
       form={
         <div>
           <h1 className="font-display text-2xl text-foreground">Vantagens, Defeitos e Antecedentes</h1>
-          <p className="mt-1 text-sm text-ink-muted">
+          <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-ink-muted">
             Orçamento: {MERIT_BUDGET} pontos de Vantagens, {FLAW_BUDGET} de Defeitos.
+            <LoreTooltip
+              summary={ADVANTAGES_BUDGET_COPY.summary}
+              sourceDocument={SOURCE_DOCUMENT}
+              sourcePage={ADVANTAGES_BUDGET_COPY.sourcePage}
+            />
           </p>
 
           <div className="mt-6">

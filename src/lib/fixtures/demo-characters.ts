@@ -15,6 +15,7 @@ export const DEMO_CHARACTERS: CharacterSummary[] = [
     concept: "Curadora de galeria obcecada pela beleza que não envelhece",
     status: "approved",
     completion: 100,
+    creationStep: 9,
   },
   {
     id: "demo-2",
@@ -25,6 +26,7 @@ export const DEMO_CHARACTERS: CharacterSummary[] = [
     concept: "Ex-jornalista investigativo escondido nos túneis do metrô",
     status: "submitted",
     completion: 92,
+    creationStep: 9,
   },
   {
     id: "demo-3",
@@ -35,5 +37,6 @@ export const DEMO_CHARACTERS: CharacterSummary[] = [
     concept: "Química forense que ainda sente o sol como um peso, não uma dor",
     status: "draft",
     completion: 46,
+    creationStep: 4,
   },
 ];

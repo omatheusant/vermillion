@@ -13,6 +13,7 @@ import {
   getCharacterAdvantages,
   getCharacterHumanity,
 } from "@/lib/wizard";
+import { getCharacterPortraitSignedUrl } from "@/lib/portrait";
 
 const NAV_ITEMS = [
   { label: "O Conselho", href: "/app/conselho" },
@@ -28,7 +29,7 @@ export default async function ConselhoReviewPage({
   const { supabase } = await requireCouncilStaff();
 
   const { character, ownerUsername, clanName } = await getCharacterForReview(supabase, characterId);
-  const [details, attributes, { skills, specializations }, disciplines, { merits, flaws }, { convictions, touchstones, tracks }, reviewEvents] =
+  const [details, attributes, { skills, specializations }, disciplines, { merits, flaws }, { convictions, touchstones, tracks }, reviewEvents, portraitUrl] =
     await Promise.all([
       getCharacterDetails(supabase, characterId),
       getCharacterAttributes(supabase, characterId),
@@ -37,6 +38,7 @@ export default async function ConselhoReviewPage({
       getCharacterAdvantages(supabase, characterId),
       getCharacterHumanity(supabase, characterId),
       getReviewHistory(supabase, characterId),
+      getCharacterPortraitSignedUrl(supabase, characterId),
     ]);
 
   return (
@@ -52,6 +54,7 @@ export default async function ConselhoReviewPage({
             data={{
               character,
               clanName,
+              portraitUrl,
               details,
               attributes,
               skills,

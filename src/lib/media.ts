@@ -62,3 +62,6 @@ export function generateRandomFileName(extension: string): string {
 }
 
 export const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
+
+/** Retrato já sai recortado/reencodado em JPEG pelo client (src/lib/image-crop.ts) — teto maior só por segurança. */
+export const MAX_PORTRAIT_BYTES = 8 * 1024 * 1024;

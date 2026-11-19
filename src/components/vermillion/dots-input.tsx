@@ -7,6 +7,7 @@
  */
 export function DotsInput({
   label,
+  labelAddon,
   value,
   max = 5,
   min = 0,
@@ -14,6 +15,8 @@ export function DotsInput({
   disabled,
 }: {
   label: string;
+  /** Ex.: um `LoreTooltip` — fica dentro da coluna de rótulo (largura fixa), nunca afeta `aria-label`. */
+  labelAddon?: React.ReactNode;
   value: number;
   max?: number;
   min?: number;
@@ -49,7 +52,10 @@ export function DotsInput({
       onKeyDown={handleKeyDown}
       className="flex items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 rounded-sm"
     >
-      <span className="w-40 shrink-0 truncate text-sm text-foreground">{label}</span>
+      <span className="flex w-40 shrink-0 items-center gap-1 text-sm text-foreground">
+        <span className="truncate">{label}</span>
+        {labelAddon}
+      </span>
       <div className="flex gap-1">
         {Array.from({ length: max }, (_, i) => i + 1).map((dot) => (
           <button

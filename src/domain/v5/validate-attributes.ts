@@ -1,4 +1,5 @@
 import { ATTRIBUTE_IDS, type AttributeDots, type ValidationIssue } from "./types";
+import { ATTRIBUTE_LABELS } from "@/lib/v5-labels";
 
 /**
  * Distribuição inicial dos 9 Atributos — docs/V5_RULES_MATRIX.md §4:
@@ -12,7 +13,7 @@ export function validateAttributes(dots: AttributeDots[]): ValidationIssue[] {
 
   for (const dot of dots) {
     if (seen.has(dot.attributeId)) {
-      issues.push({ step: 3, field: dot.attributeId, message: `Atributo duplicado: ${dot.attributeId}.` });
+      issues.push({ step: 3, field: dot.attributeId, message: `Atributo duplicado: ${ATTRIBUTE_LABELS[dot.attributeId]}.` });
     }
     seen.add(dot.attributeId);
 
@@ -23,7 +24,7 @@ export function validateAttributes(dots: AttributeDots[]): ValidationIssue[] {
 
   for (const attributeId of ATTRIBUTE_IDS) {
     if (!seen.has(attributeId)) {
-      issues.push({ step: 3, field: attributeId, message: `Atributo ${attributeId} não foi preenchido.` });
+      issues.push({ step: 3, field: attributeId, message: `Atributo ${ATTRIBUTE_LABELS[attributeId]} não foi preenchido.` });
     }
   }
 

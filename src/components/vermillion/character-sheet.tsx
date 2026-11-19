@@ -13,6 +13,7 @@ import type { Tables } from "@/lib/supabase/database.types";
 export interface CharacterSheetData {
   character: Pick<Tables<"characters">, "name" | "clan_id" | "lineage" | "status" | "visibility" | "sect" | "ruleset_version" | "slug">;
   clanName: string | null;
+  portraitUrl?: string | null;
   details: Tables<"character_details"> | null;
   attributes: Pick<Tables<"character_attributes">, "attribute_id" | "value">[];
   skills: Pick<Tables<"character_skills">, "skill_id" | "value">[];
@@ -33,7 +34,7 @@ export interface CharacterSheetData {
  * (nunca "esconder visualmente" dado que já chegou ao client).
  */
 export function CharacterSheet({ data }: { data: CharacterSheetData }) {
-  const { character, clanName, details, attributes, skills, specializations, disciplines, merits, flaws, convictions, touchstones, tracks, xpEntries } = data;
+  const { character, clanName, portraitUrl, details, attributes, skills, specializations, disciplines, merits, flaws, convictions, touchstones, tracks, xpEntries } = data;
 
   const attributeByd = Object.fromEntries(attributes.map((a) => [a.attribute_id, a.value])) as Record<AttributeId, number>;
   const lineageLabel = character.lineage === "clan" ? (clanName ?? character.clan_id ?? "—") : LINEAGE_LABELS[character.lineage];
@@ -41,10 +42,21 @@ export function CharacterSheet({ data }: { data: CharacterSheetData }) {
   return (
     <div>
       <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border/70 pb-6">
-        <div>
-          <p className="font-badge text-xs uppercase tracking-[0.2em] text-ink-muted">{lineageLabel}</p>
-          <h1 className="mt-1 font-display text-3xl text-foreground md:text-4xl">{character.name}</h1>
-          {details?.concept ? <p className="mt-1 text-sm text-ink-muted">{details.concept}</p> : null}
+        <div className="flex items-center gap-4">
+          {portraitUrl ? (
+            <div
+              aria-hidden="true"
+              className="aspect-[3/4] w-16 shrink-0 overflow-hidden rounded-sm border border-border/60"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element -- URL assinada e efêmera, não compensa next/image */}
+              <img src={portraitUrl} alt="" className="size-full object-cover" />
+            </div>
+          ) : null}
+          <div>
+            <p className="font-badge text-xs uppercase tracking-[0.2em] text-ink-muted">{lineageLabel}</p>
+            <h1 className="mt-1 font-display text-3xl text-foreground md:text-4xl">{character.name}</h1>
+            {details?.concept ? <p className="mt-1 text-sm text-ink-muted">{details.concept}</p> : null}
+          </div>
         </div>
         <StatusBadge status={character.status} />
       </header>

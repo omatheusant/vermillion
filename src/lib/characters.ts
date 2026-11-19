@@ -1,5 +1,6 @@
 import "server-only";
 import { createClient } from "@/lib/supabase/server";
+import { getCharacterPortraitSignedUrls } from "@/lib/portrait";
 import type { CharacterLineage, CharacterStatus, CharacterSummary } from "@/types/character";
 
 export const DEFAULT_CHRONICLE_SLUG = "vermillion";
@@ -54,6 +55,11 @@ export async function listMyCharacters(): Promise<CharacterSummary[]> {
     throw new Error(`Falha ao carregar personagens: ${error.message}`);
   }
 
+  const portraitByCharacterId = await getCharacterPortraitSignedUrls(
+    supabase,
+    (data ?? []).map((row) => row.id),
+  );
+
   return (data ?? []).map((row) => ({
     id: row.id,
     name: row.name,
@@ -63,6 +69,9 @@ export async function listMyCharacters(): Promise<CharacterSummary[]> {
     concept: row.details?.concept ?? "",
     status: row.status as CharacterStatus,
     completion: estimateCompletion(row.creation_step, row.status as CharacterStatus),
+    /** Última etapa (1-9) já preenchida — usada para retomar edição de rascunho em vez de sempre reabrir a etapa 1. */
+    creationStep: row.creation_step,
+    portraitUrl: portraitByCharacterId.get(row.id),
   }));
 }
 

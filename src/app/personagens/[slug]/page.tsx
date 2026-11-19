@@ -33,13 +33,22 @@ export default async function PersonagemPublicoPage({ params }: { params: Promis
   const result = await getPublicCharacterBySlug(slug);
   if (!result) notFound();
 
-  const { character, clan, owner } = result;
+  const { character, clan, owner, portraitUrl } = result;
   const lineageLabel = character.lineage === "clan" ? (clan?.name ?? character.clan_id) : LINEAGE_LABELS[character.lineage];
 
   return (
     <GothicShell navItems={NAV_ITEMS}>
       <div className="mx-auto max-w-3xl px-6 py-12">
         <VelvetCard ornate className="p-8">
+          {portraitUrl ? (
+            <div
+              aria-hidden="true"
+              className="float-right ml-6 aspect-[3/4] w-32 shrink-0 overflow-hidden rounded-sm border border-border/60 sm:w-40"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element -- URL assinada e efêmera, não compensa next/image */}
+              <img src={portraitUrl} alt="" className="size-full object-cover" />
+            </div>
+          ) : null}
           <p className="font-badge text-xs uppercase tracking-[0.2em] text-ink-muted">{lineageLabel}</p>
           <h1 className="mt-2 font-display text-4xl text-foreground">{character.name}</h1>
           {owner?.username ? (

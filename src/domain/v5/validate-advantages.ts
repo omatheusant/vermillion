@@ -35,8 +35,12 @@ export function validateAdvantages(merits: AdvantagePick[], flaws: AdvantagePick
     });
   }
 
+  // Méritos/Defeitos de Sangue-Ralo (reference_advantages.lineage_restriction
+  // = 'thin_blood') não têm custo em pontos no corebook (dots_min=dots_max=0
+  // no catálogo) — por isso 0 é um valor aceitável aqui. O <input min=...> da
+  // UI usa o dots_min do item do catálogo para impedir 0 em itens comuns.
   for (const pick of [...merits, ...flaws]) {
-    if (pick.dots < 1 || pick.dots > 5) {
+    if (pick.dots < 0 || pick.dots > 5) {
       issues.push({ step: 6, field: "advantages", message: "Cada Vantagem/Defeito vale entre 1 e 5 pontos." });
     }
   }
