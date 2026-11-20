@@ -155,21 +155,21 @@ export function ClanSelector({
                   ornate={isSelected}
                   className={cn("transition-colors", isSelected ? "border-ornament-gold" : "hover:border-ornament-gold/50")}
                 >
-                  <div className="flex flex-col gap-4 sm:flex-row">
+                  <div className="flex flex-col gap-4 sm:h-64 sm:flex-row">
                     <div
                       aria-hidden="true"
-                      className="aspect-[3/4] w-full shrink-0 overflow-hidden rounded-sm border border-border/60 bg-gradient-to-b from-surface-wine to-background sm:w-36"
+                      className="aspect-[3/4] w-full shrink-0 overflow-hidden rounded-sm border border-border/60 bg-gradient-to-b from-surface-wine to-background sm:h-full sm:w-36"
                     >
                       <div className="flex size-full items-center justify-center font-display text-3xl text-ink-muted">
                         {card.name.charAt(0)}
                       </div>
                     </div>
 
-                    <div className="flex-1">
+                    <div className="flex min-w-0 flex-1 flex-col">
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="font-display text-xl text-foreground">{card.name}</h3>
                         {isSelected ? (
-                          <span className="flex items-center gap-1 font-badge text-[0.65rem] uppercase tracking-[0.1em] text-ornament-gold">
+                          <span className="flex shrink-0 items-center gap-1 font-badge text-[0.65rem] uppercase tracking-[0.1em] text-ornament-gold">
                             <Check className="size-3.5" aria-hidden="true" /> Selecionado
                           </span>
                         ) : null}
@@ -179,9 +179,11 @@ export function ClanSelector({
                           {card.disciplines.map((d) => DISCIPLINE_LABELS[d] ?? d).join(" · ")}
                         </p>
                       ) : null}
-                      {card.summary ? <p className="mt-3 text-sm text-foreground">{card.summary}</p> : null}
+                      {card.summary ? (
+                        <p className="mt-3 overflow-y-auto text-sm text-foreground">{card.summary}</p>
+                      ) : null}
                       {card.bane ? (
-                        <p className="mt-2 text-xs text-ink-muted">
+                        <p className="mt-2 overflow-y-auto text-xs text-ink-muted">
                           <span className="text-accent-crimson-bright">Fraqueza: </span>
                           {card.bane}
                         </p>

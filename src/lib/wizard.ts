@@ -64,7 +64,7 @@ export async function getPowersForDisciplines(
 export async function getAdvantageCatalog(supabase: Awaited<ReturnType<typeof requireUser>>["supabase"]) {
   const { data } = await supabase
     .from("reference_advantages")
-    .select("id, kind, name, dots_min, dots_max, summary, lineage_restriction")
+    .select("id, kind, name, dots_min, dots_max, summary, lineage_restriction, source_document, source_page")
     .order("name");
   return data ?? [];
 }

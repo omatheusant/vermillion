@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Check } from "lucide-react";
 import { VelvetCard } from "@/components/vermillion/velvet-card";
 import { DotsInput } from "@/components/vermillion/dots-input";
 import { FormField, fieldInputClassName } from "@/components/vermillion/form-field";
@@ -36,7 +37,12 @@ export function WizardStepDisciplines({
   initialAlchemy: { level: number; note: string };
 }) {
   const [version, setVersion] = useState(initialVersion);
-  const [picks, setPicks] = useState(initialPicks);
+  const [primaryId, setPrimaryId] = useState<DisciplineId | null>(
+    initialPicks.find((p) => p.value === 2)?.disciplineId ?? null,
+  );
+  const [secondaryId, setSecondaryId] = useState<DisciplineId | null>(
+    initialPicks.find((p) => p.value === 1)?.disciplineId ?? null,
+  );
   const [alchemyLevel, setAlchemyLevel] = useState(initialAlchemy.level);
   const [alchemyNote, setAlchemyNote] = useState(initialAlchemy.note);
 
@@ -44,6 +50,13 @@ export function WizardStepDisciplines({
     lineage === "clan"
       ? clanDisciplineIds
       : (Object.keys(DISCIPLINE_LABELS).filter((id) => id !== "thin_blood_alchemy") as DisciplineId[]);
+
+  const picks = useMemo(() => {
+    const result: { disciplineId: DisciplineId; value: number }[] = [];
+    if (primaryId) result.push({ disciplineId: primaryId, value: 2 });
+    if (secondaryId) result.push({ disciplineId: secondaryId, value: 1 });
+    return result;
+  }, [primaryId, secondaryId]);
 
   const source = lineage === "clan" ? "clan" : lineage === "caitiff" ? "caitiff" : "clan";
   const disciplinePicks = picks.map((p) => ({ ...p, source: source as "clan" | "caitiff" }));
@@ -56,16 +69,14 @@ export function WizardStepDisciplines({
     [lineage, disciplinePicks, alchemyLevel, alchemyNote, clanDisciplineIds],
   );
 
-  function setValue(disciplineId: DisciplineId, value: number) {
-    setPicks((prev) => {
-      const withoutThis = prev.filter((p) => p.disciplineId !== disciplineId);
-      if (value === 0) return withoutThis;
-      return [...withoutThis, { disciplineId, value }];
-    });
+  function selectPrimary(disciplineId: DisciplineId) {
+    if (disciplineId === secondaryId) setSecondaryId(null);
+    setPrimaryId((prev) => (prev === disciplineId ? null : disciplineId));
   }
 
-  function valueFor(disciplineId: DisciplineId) {
-    return picks.find((p) => p.disciplineId === disciplineId)?.value ?? 0;
+  function selectSecondary(disciplineId: DisciplineId) {
+    if (disciplineId === primaryId) return;
+    setSecondaryId((prev) => (prev === disciplineId ? null : disciplineId));
   }
 
   return (
@@ -98,19 +109,72 @@ export function WizardStepDisciplines({
           ) : (
             <>
               <p className="mt-1 text-sm text-ink-muted">
-                Escolha duas Disciplinas{lineage === "clan" ? " do seu clã" : ""} — uma com 2 pontos, outra com 1.
+                Escolha duas Disciplinas{lineage === "clan" ? " do seu clã" : ""}: uma Disciplina principal (recebe
+                2 pontos) e uma secundária (recebe 1 ponto). Selecione cada uma na lista correspondente — não dá
+                para repetir a mesma Disciplina nas duas colunas.
               </p>
-              <div className="mt-4 space-y-3">
-                {availableDisciplines.map((disciplineId) => (
-                  <DotsInput
-                    key={disciplineId}
-                    label={DISCIPLINE_LABELS[disciplineId]}
-                    value={valueFor(disciplineId)}
-                    min={0}
-                    max={2}
-                    onChange={(value) => setValue(disciplineId, value)}
-                  />
-                ))}
+              <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div>
+                  <h3 className="font-badge text-xs uppercase tracking-[0.1em] text-ink-muted">
+                    Disciplina principal (2 pontos)
+                  </h3>
+                  <div className="mt-2 space-y-1.5">
+                    {availableDisciplines.map((disciplineId) => {
+                      const isSelected = primaryId === disciplineId;
+                      const isBlocked = !isSelected && secondaryId === disciplineId;
+                      return (
+                        <button
+                          key={disciplineId}
+                          type="button"
+                          disabled={isBlocked}
+                          onClick={() => selectPrimary(disciplineId)}
+                          aria-pressed={isSelected}
+                          className={`flex w-full items-center justify-between rounded-sm border px-3 py-2 text-left text-sm transition-colors ${
+                            isSelected
+                              ? "border-ornament-gold bg-surface-wine text-foreground"
+                              : isBlocked
+                                ? "cursor-not-allowed border-border/50 text-ink-muted/50"
+                                : "border-border text-foreground hover:border-ornament-gold/50"
+                          }`}
+                        >
+                          {DISCIPLINE_LABELS[disciplineId]}
+                          {isSelected ? <Check className="size-3.5 text-ornament-gold" aria-hidden="true" /> : null}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-badge text-xs uppercase tracking-[0.1em] text-ink-muted">
+                    Disciplina secundária (1 ponto)
+                  </h3>
+                  <div className="mt-2 space-y-1.5">
+                    {availableDisciplines.map((disciplineId) => {
+                      const isSelected = secondaryId === disciplineId;
+                      const isBlocked = !isSelected && primaryId === disciplineId;
+                      return (
+                        <button
+                          key={disciplineId}
+                          type="button"
+                          disabled={isBlocked}
+                          onClick={() => selectSecondary(disciplineId)}
+                          aria-pressed={isSelected}
+                          className={`flex w-full items-center justify-between rounded-sm border px-3 py-2 text-left text-sm transition-colors ${
+                            isSelected
+                              ? "border-ornament-gold bg-surface-wine text-foreground"
+                              : isBlocked
+                                ? "cursor-not-allowed border-border/50 text-ink-muted/50"
+                                : "border-border text-foreground hover:border-ornament-gold/50"
+                          }`}
+                        >
+                          {DISCIPLINE_LABELS[disciplineId]}
+                          {isSelected ? <Check className="size-3.5 text-ornament-gold" aria-hidden="true" /> : null}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
 
               <div className="mt-6 space-y-4">

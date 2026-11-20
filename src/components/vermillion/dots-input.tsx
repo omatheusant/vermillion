@@ -13,6 +13,7 @@ export function DotsInput({
   min = 0,
   onChange,
   disabled,
+  blockedValues,
 }: {
   label: string;
   /** Ex.: um `LoreTooltip` — fica dentro da coluna de rótulo (largura fixa), nunca afeta `aria-label`. */
@@ -22,6 +23,12 @@ export function DotsInput({
   min?: number;
   onChange: (value: number) => void;
   disabled?: boolean;
+  /**
+   * Valores de pontinho indisponíveis agora (ex.: orçamento daquele nível
+   * já esgotado por outras perícias) — ficam visualmente travados, mas o
+   * valor atual nunca é bloqueado (sempre pode reduzir/desmarcar).
+   */
+  blockedValues?: number[];
 }) {
   function handleKeyDown(event: React.KeyboardEvent) {
     if (disabled) return;
@@ -57,19 +64,27 @@ export function DotsInput({
         {labelAddon}
       </span>
       <div className="flex gap-1">
-        {Array.from({ length: max }, (_, i) => i + 1).map((dot) => (
-          <button
-            key={dot}
-            type="button"
-            tabIndex={-1}
-            disabled={disabled}
-            onClick={() => onChange(dot === value ? dot - 1 : dot)}
-            aria-hidden="true"
-            className={`size-3.5 rounded-full border transition-colors ${
-              dot <= value ? "border-ornament-gold bg-ornament-gold" : "border-border bg-transparent"
-            } ${disabled ? "opacity-50" : "hover:border-ornament-gold/80"}`}
-          />
-        ))}
+        {Array.from({ length: max }, (_, i) => i + 1).map((dot) => {
+          const isBlocked = dot !== value && (blockedValues?.includes(dot) ?? false);
+          const isDisabled = disabled || isBlocked;
+          return (
+            <button
+              key={dot}
+              type="button"
+              tabIndex={-1}
+              disabled={isDisabled}
+              title={isBlocked ? "Sem orçamento disponível para este nível" : undefined}
+              onClick={() => {
+                if (isDisabled) return;
+                onChange(dot === value ? dot - 1 : dot);
+              }}
+              aria-hidden="true"
+              className={`size-3.5 rounded-full border transition-colors ${
+                dot <= value ? "border-ornament-gold bg-ornament-gold" : "border-border bg-transparent"
+              } ${isDisabled ? "cursor-not-allowed opacity-30" : "hover:border-ornament-gold/80"}`}
+            />
+          );
+        })}
       </div>
       <span className="w-4 text-right font-badge text-xs text-ink-muted">{value}</span>
     </div>

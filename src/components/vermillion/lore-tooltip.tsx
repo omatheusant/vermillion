@@ -29,10 +29,10 @@ export function LoreTooltip({
           <CircleHelp className="size-4" aria-hidden="true" />
         </button>
       </TooltipTrigger>
-      <TooltipContent className="max-w-64 text-left">
-        <p>{summary}</p>
+      <TooltipContent className="flex max-w-64 flex-col items-start gap-1 whitespace-normal text-left font-sans">
+        <p className="text-xs leading-relaxed">{summary}</p>
         {sourceDocument ? (
-          <p className="mt-1 text-[0.7rem] text-ink-muted">
+          <p className="text-[0.7rem] leading-relaxed text-ink-muted">
             Fonte: {sourceDocument}
             {sourcePage ? `, p. ${sourcePage}` : ""}
           </p>

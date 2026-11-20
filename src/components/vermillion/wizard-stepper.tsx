@@ -34,17 +34,24 @@ export function WizardStepper({
       {steps.map((step) => {
         const isCurrent = step.index === currentStep;
         const isComplete = step.index < currentStep && !step.pendingCount;
+        /** A "Introdução" (índice 0) é a tela de criação do personagem, anterior
+         * ao wizard — não existe rota /editar/0 para revisitá-la, então o item
+         * fica só como indicador de progresso, sem navegação (evita "Esta etapa
+         * não existe" ao clicar nela depois de avançar). */
+        const isNavigable = step.index > 0;
         return (
           <button
             key={step.index}
             type="button"
             aria-current={isCurrent ? "step" : undefined}
-            onClick={() => onStepSelect?.(step.index)}
+            disabled={!isNavigable}
+            onClick={isNavigable ? () => onStepSelect?.(step.index) : undefined}
             className={cn(
               "flex shrink-0 items-center gap-3 rounded-sm border px-3 py-2 text-left text-sm transition-colors md:shrink",
               isCurrent
                 ? "border-ornament-gold/60 bg-surface-wine text-foreground"
-                : "border-transparent text-ink-muted hover:border-border hover:text-foreground"
+                : "border-transparent text-ink-muted hover:border-border hover:text-foreground",
+              !isNavigable && "cursor-default hover:border-transparent hover:text-ink-muted"
             )}
           >
             <span

@@ -8,7 +8,7 @@ import { LoreTooltip } from "@/components/vermillion/lore-tooltip";
 import { Button } from "@/components/ui/button";
 import { WizardStepFrame } from "@/components/vermillion/wizard-step-frame";
 import { saveSkillsStepAction } from "@/lib/wizard-actions";
-import { SKILL_IDS, validateSkills, type SkillId, type SkillPreset } from "@/domain/v5";
+import { SKILL_IDS, SKILL_PRESET_BUDGET, validateSkills, type SkillId, type SkillPreset } from "@/domain/v5";
 import { SKILL_LABELS } from "@/lib/v5-labels";
 import { SKILL_COPY, SOURCE_DOCUMENT } from "@/lib/v5-copy";
 
@@ -51,6 +51,20 @@ export function WizardStepSkills({
   const dots = useMemo(() => SKILL_IDS.map((skillId) => ({ skillId, value: values[skillId] })), [values]);
   const issues = useMemo(() => validateSkills(preset, dots), [preset, dots]);
 
+  const budget = SKILL_PRESET_BUDGET[preset];
+  const countByLevel = useMemo(() => {
+    const counts = new Map<number, number>();
+    for (const skillId of SKILL_IDS) {
+      const v = values[skillId];
+      if (v > 0) counts.set(v, (counts.get(v) ?? 0) + 1);
+    }
+    return counts;
+  }, [values]);
+  const blockedLevels = useMemo(
+    () => budget.filter((b) => (countByLevel.get(b.value) ?? 0) >= b.count).map((b) => b.value),
+    [budget, countByLevel],
+  );
+
   function changePreset(next: SkillPreset) {
     setPreset(next);
     setValues(Object.fromEntries(SKILL_IDS.map((id) => [id, 0])) as Record<SkillId, number>);
@@ -86,6 +100,28 @@ export function WizardStepSkills({
             ))}
           </div>
 
+          <div className="mt-4 flex flex-wrap gap-2" role="status">
+            {budget.map((b) => {
+              const used = countByLevel.get(b.value) ?? 0;
+              const full = used >= b.count;
+              return (
+                <span
+                  key={b.value}
+                  className={`rounded-full border px-2.5 py-1 font-badge text-[0.65rem] uppercase tracking-[0.08em] ${
+                    full ? "border-ornament-gold/60 bg-surface-wine text-ornament-gold" : "border-border text-ink-muted"
+                  }`}
+                >
+                  Nível {b.value}: {used}/{b.count}
+                </span>
+              );
+            })}
+          </div>
+          <p className="mt-2 text-xs text-ink-muted">
+            Clique nos pontinhos para marcar o nível de cada perícia. Quando um nível esgota, os pontinhos
+            correspondentes ficam travados nas outras perícias — só liberam se você reduzir alguma que já usa aquele
+            nível.
+          </p>
+
           <div className="mt-6 space-y-6">
             {(["physical", "social", "mental"] as const).map((category) => (
               <div key={category}>
@@ -107,6 +143,7 @@ export function WizardStepSkills({
                       value={values[skillId]}
                       min={0}
                       max={preset === "specialist" ? 4 : 3}
+                      blockedValues={blockedLevels}
                       onChange={(value) => setValues((prev) => ({ ...prev, [skillId]: value }))}
                     />
                   ))}
